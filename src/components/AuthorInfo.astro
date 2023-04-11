@@ -1,13 +1,16 @@
 ---
-import { getEntryBySlug } from "astro:content";
+import { getEntryBySlug, getCollection } from "astro:content";
 
 export interface Props {
   authorId: string;
+  showPosts?: boolean;
 }
 
-const entry = await getEntryBySlug("author", Astro.props.authorId);
+const { authorId, showPosts } = Astro.props;
+
+const entry = await getEntryBySlug("author", authorId);
 if (!entry) {
-  throw new Error(`Author with id ${Astro.props.authorId} not found`);
+  throw new Error(`Author with id ${authorId} not found`);
 }
 
 const { Content } = await entry.render();
@@ -17,17 +20,41 @@ const socials = [
   { name: "LinkedIn", url: linkedin },
   { name: "Twitter", url: twitter },
 ].filter((social) => social.url);
+
+const posts = await getCollection("blog");
+const authorPosts = posts
+  .filter((post) => post.data.authorId === authorId)
+  .map((post) => ({
+    url: `/blog/${post.slug}`,
+    data: post.data,
+  }));
 ---
 
 <div class="author">
   <h2>{firstname} {lastname}</h2>
   <img src={avatar} alt={`${firstname} ${lastname}`} />
   <div><Content /></div>
+
+  {
+    showPosts && authorPosts.length > 0 && (
+      <>
+        <p>My posts ({authorPosts.length})</p>
+        <ul>
+          {authorPosts.map((post) => (
+            <li>
+              <a href={post.url}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
   {
     socials.length > 0 && (
       <>
         <p>My links</p>
-        <ul>
+        <ul class="socials">
           {socials.map((social) => (
             <li>
               <a href={social.url}>{social.name}</a>
@@ -53,7 +80,7 @@ const socials = [
     height: 100px;
     border-radius: 50%;
   }
-  .author ul {
+  .author .socials {
     list-style: none;
     padding: 0;
     margin: 0;

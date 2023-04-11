@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/AuthorsOverview.astro";
+
+const authors = await getCollection("author");
+---
+
+<Layout title="Authors" description="A list of authors" authors={authors}>
+  <p>Here you can find all the authors of this blog.</p>
+</Layout>
