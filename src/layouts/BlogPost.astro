@@ -5,10 +5,11 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import AuthorInfo from "../components/AuthorInfo.astro";
+import TopicList from "../components/TopicList.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, authors } =
+const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
   Astro.props;
 ---
 
@@ -52,6 +53,14 @@ const { title, description, pubDate, updatedDate, heroImage, authors } =
         <hr />
         <slot />
         <footer>
+          {
+            topics.length > 0 && (
+              <>
+                <h2>Topics</h2>
+                <TopicList topics={topics} />
+              </>
+            )
+          }
           <h2>Author{authors.length > 1 ? "s" : ""}</h2>
           <ul class="author-list">
             {

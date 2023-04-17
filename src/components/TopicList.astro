@@ -1,0 +1,49 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+
+/**
+ * This component expects either a list of topics as a prop, or an explicit 'all' to render all topics.
+ * This way, the component can be used to render a list of topics for a specific page, or all topics for a page like /topics.
+ *
+ * This is an unstyled list of all topics. Apply a class to the component to style it.
+ */
+
+export interface Props {
+  class?: string;
+  topics: "all" | string[];
+}
+
+const { class: className = "", topics = [] } = Astro.props;
+
+let topicsFromProps = undefined;
+if (topics !== "all") {
+  topicsFromProps = await Promise.all(
+    (topics as string[]).map((topic) => getEntryBySlug("topic", topic))
+  );
+}
+
+const allTopics = (await getCollection("topic")).sort((a, b) => {
+  if (a.data.title < b.data.title) {
+    return -1;
+  }
+  if (a.data.title > b.data.title) {
+    return 1;
+  }
+  return 0;
+});
+
+const renderTopics = topics === "all" ? allTopics : topicsFromProps;
+---
+
+<ul class={className}>
+  {
+    !!renderTopics &&
+      renderTopics
+        .filter((topic) => !!topic?.slug && !!topic?.data.title)
+        .map((topic) => (
+          <li>
+            <a href={`/topics/${topic?.slug}/`}>{topic?.data.title}</a>
+          </li>
+        ))
+  }
+</ul>

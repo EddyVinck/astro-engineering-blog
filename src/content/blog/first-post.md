@@ -1,8 +1,9 @@
 ---
+title: "First post"
+topics: ["front-end"]
 authors:
   - eddy-vinck
   - anonymous
-title: "First post"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "Jul 08 2022"
 heroImage: "/placeholder-hero.jpg"
