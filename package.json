@@ -1,7 +1,12 @@
 {
-  "name": "",
+  "name": "astro-engineering-blog",
   "type": "module",
   "version": "0.0.1",
+  "author": "Eddy Vinck",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EddyVinck/astro-engineering-blog.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
