@@ -51,7 +51,13 @@ export default function Search({ searchList }: Props) {
 
   return (
     <div>
-      <input onInput={(e) => setQuery(e.target.value)} value={query()} />
+      <label for="search">Search blog posts:</label>
+      <input
+        id="search"
+        onInput={(e) => setQuery(e.target.value)}
+        value={query()}
+        placeholder="Search blog posts..."
+      />
       <Show when={posts().length > 0}>
         <ul>
           {posts().map((post) => (

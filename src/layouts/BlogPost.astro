@@ -61,14 +61,18 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
               </>
             )
           }
-          <h2>Author{authors.length > 1 ? "s" : ""}</h2>
-          <ul class="author-list">
-            {
-              authors.map((authorId) => (
-                <AuthorInfo authorId={authorId} headingLevel={3} />
-              ))
-            }
-          </ul>
+          {
+            !!authors.length && (
+              <>
+                <h2>Author{authors.length > 1 ? "s" : ""}</h2>
+                <ul class="author-list">
+                  {authors.map((authorId) => (
+                    <AuthorInfo authorId={authorId} headingLevel={3} />
+                  ))}
+                </ul>
+              </>
+            )
+          }
         </footer>
       </article>
     </main>
