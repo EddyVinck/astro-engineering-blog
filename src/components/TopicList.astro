@@ -18,7 +18,7 @@ const { class: className = "", topics = [] } = Astro.props;
 let topicsFromProps = undefined;
 if (topics !== "all") {
   topicsFromProps = await Promise.all(
-    (topics as string[]).map((topic) => getEntryBySlug("topic", topic))
+    topics.map((topic) => getEntryBySlug("topic", topic))
   );
 }
 
