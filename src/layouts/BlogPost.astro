@@ -8,7 +8,7 @@ import AuthorInfo from "../components/AuthorInfo.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, authorId } =
+const { title, description, pubDate, updatedDate, heroImage, authors } =
   Astro.props;
 ---
 
@@ -26,6 +26,11 @@ const { title, description, pubDate, updatedDate, heroImage, authorId } =
       }
       .last-updated-on {
         font-style: italic;
+      }
+      .author-list {
+        padding-left: 0;
+        display: grid;
+        gap: 1rem;
       }
     </style>
   </head>
@@ -47,7 +52,14 @@ const { title, description, pubDate, updatedDate, heroImage, authorId } =
         <hr />
         <slot />
         <footer>
-          <AuthorInfo authorId={authorId} />
+          <h2>Author{authors.length > 1 ? "s" : ""}</h2>
+          <ul class="author-list">
+            {
+              authors.map((authorId) => (
+                <AuthorInfo authorId={authorId} headingLevel={3} />
+              ))
+            }
+          </ul>
         </footer>
       </article>
     </main>

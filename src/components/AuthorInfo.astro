@@ -4,9 +4,11 @@ import { getEntryBySlug, getCollection } from "astro:content";
 export interface Props {
   authorId: string;
   showPosts?: boolean;
+  headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const { authorId, showPosts } = Astro.props;
+const { authorId, showPosts, headingLevel = 2 } = Astro.props;
+const H = `h${headingLevel}`;
 
 const entry = await getEntryBySlug("author", authorId);
 if (!entry) {
@@ -23,7 +25,7 @@ const socials = [
 
 const posts = await getCollection("blog");
 const authorPosts = posts
-  .filter((post) => post.data.authorId === authorId)
+  .filter((post) => post.data.authors.includes(authorId))
   .map((post) => ({
     url: `/blog/${post.slug}`,
     data: post.data,
@@ -31,7 +33,7 @@ const authorPosts = posts
 ---
 
 <div class="author">
-  <h2>{firstname} {lastname}</h2>
+  <H>{firstname} {lastname}</H>
   <img src={avatar} alt={`${firstname} ${lastname}`} />
   <div><Content /></div>
 
