@@ -4,7 +4,7 @@ topics: []
 authors:
   - eddy-vinck
 description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 15 2022"
+pubDate: "Jul 22 2022"
 heroImage: "/placeholder-hero.jpg"
 ---
 
