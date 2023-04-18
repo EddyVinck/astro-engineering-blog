@@ -1,15 +1,8 @@
 ---
-import Layout from "../layouts/BlogPost.astro";
+import Layout from "../layouts/Page.astro";
 import Searchbar from "../components/Searchbar.astro";
 ---
 
-<Layout
-  authors={[]}
-  topics={[]}
-  title="Search"
-  description="Lorem ipsum dolor sit amet"
-  pubDate={new Date("August 08 2021")}
-  updatedDate={new Date("August 08 2022")}
->
+<Layout title="Search" description="Lorem ipsum dolor sit amet">
   <Searchbar />
 </Layout>

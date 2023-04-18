@@ -4,29 +4,35 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <h2>
-    {SITE_TITLE}
-  </h2>
-  <nav>
-    <HeaderLink href="/">Home</HeaderLink>
-    <HeaderLink href="/blog">Blog</HeaderLink>
-    <HeaderLink href="/authors">Authors</HeaderLink>
-    <HeaderLink href="/topics">Topics</HeaderLink>
-    <HeaderLink href="/about">About</HeaderLink>
-    <HeaderLink href="/search">Search</HeaderLink>
-    <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
-      Twitter
-    </HeaderLink>
-    <HeaderLink href="https://github.com/withastro/astro" target="_blank">
-      GitHub
-    </HeaderLink>
-  </nav>
+  <div class="container">
+    <h2>
+      {SITE_TITLE}
+    </h2>
+    <nav>
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/authors">Authors</HeaderLink>
+      <HeaderLink href="/topics">Topics</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
+      <HeaderLink href="/search">Search</HeaderLink>
+      <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
+        Twitter
+      </HeaderLink>
+      <HeaderLink href="https://github.com/withastro/astro" target="_blank">
+        GitHub
+      </HeaderLink>
+    </nav>
+  </div>
 </header>
+
 <style>
   header {
+    padding: 1rem 0.5rem;
+    background: #000;
+    color: #fff;
     margin: 0em 0 2em;
   }
   h2 {
-    margin: 0.5em 0;
+    margin: 0 0 0.5em 0;
   }
 </style>

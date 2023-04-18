@@ -1,9 +1,6 @@
 ---
+import Layout from "../../layouts/Page.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
   const topics = await getCollection("topic");
@@ -24,51 +21,45 @@ const topicPosts = posts
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      ul {
-        list-style-type: none;
-        padding: unset;
-      }
-      ul li {
-        display: flex;
-      }
-      ul li :global(time) {
-        flex: 0 0 130px;
-        font-style: italic;
-        color: #595959;
-      }
-      ul li a:visited {
-        color: #8e32dc;
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <section>
-        <h1>{topic.data.title}</h1>
-        <Content />
-        {topicPosts.length === 0 && <p>No posts yet.</p>}
-        {
-          topicPosts.length > 0 && (
-            <>
-              <h2>Posts about {topic.data.title.toLowerCase()}</h2>
-              <ul>
-                {topicPosts.map((post) => (
-                  <li>
-                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )
-        }
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+<Layout
+  title="Topics"
+  description="An overview of all the various topics on our blog."
+>
+  <section>
+    <h1>{topic.data.title}</h1>
+    <Content />
+    {topicPosts.length === 0 && <p>No posts yet.</p>}
+    {
+      topicPosts.length > 0 && (
+        <>
+          <h2>Posts about {topic.data.title.toLowerCase()}</h2>
+          <ul>
+            {topicPosts.map((post) => (
+              <li>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li :global(time) {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+</style>

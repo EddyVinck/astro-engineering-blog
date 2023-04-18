@@ -1,8 +1,5 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import Layout from "../../layouts/Page.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import FormattedDate from "../../components/FormattedDate.astro";
@@ -23,77 +20,71 @@ export type Props = {
 const { page } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <ul class="post-list">
-        {
-          page.data.map((post) => {
-            const { data, slug } = post;
-            const { title, authors, topics, pubDate, description } = data;
-            return (
-              <li>
-                <a href={`/blog/${slug}/`}>
-                  <h2>{title}</h2>
-                </a>
-                <p>{description}</p>
-                <FormattedDate date={pubDate} />
-                <p>Written by: {authors.join(", ")}</p>
-                <p>Topics: {topics.join(", ")}</p>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <div class="pagination">
-        {page.url.prev ? <a href={page.url.prev}>Previous</a> : <span />}
-        {page.url.current ? <span>Page {page.currentPage}</span> : <span />}
-        {page.url.next ? <a href={page.url.next}>Next</a> : <span />}
-      </div>
-    </main>
-    <Footer />
-    <style>
-      ul {
-        list-style-type: none;
-        padding: unset;
-      }
-      ul li {
-        display: flex;
-      }
-      ul li (time) {
-        flex: 0 0 130px;
-        font-style: italic;
-        color: #595959;
-      }
-      ul li a:visited {
-        color: #8e32dc;
-      }
-      .post-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .post-list li {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .post-list li h2 {
-        margin: 0;
-      }
-      .post-list li p {
-        margin: 0;
-      }
-      .pagination {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-      }
-    </style>
-  </body>
-</html>
+<Layout
+  title="Blog"
+  description="Our engineers write about the technical challanges they have faced."
+>
+  <ul class="post-list">
+    {
+      page.data.map((post) => {
+        const { data, slug } = post;
+        const { title, authors, topics, pubDate, description } = data;
+        return (
+          <li>
+            <a href={`/blog/${slug}/`}>
+              <h2>{title}</h2>
+            </a>
+            <p>{description}</p>
+            <FormattedDate date={pubDate} />
+            <p>Written by: {authors.join(", ")}</p>
+            <p>Topics: {topics.join(", ")}</p>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <div class="pagination">
+    {page.url.prev ? <a href={page.url.prev}>Previous</a> : <span />}
+    {page.url.current ? <span>Page {page.currentPage}</span> : <span />}
+    {page.url.next ? <a href={page.url.next}>Next</a> : <span />}
+  </div>
+</Layout>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li (time) {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .post-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .post-list li h2 {
+    margin: 0;
+  }
+  .post-list li p {
+    margin: 0;
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+</style>
