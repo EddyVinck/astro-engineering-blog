@@ -1,0 +1,56 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+import AuthorInfo from "./AuthorInfo.astro";
+
+/**
+ * This component expects either a list of authors as a prop, or an explicit 'all' to render all authors.
+ * This way, the component can be used to render a list of authors for a specific page, or all authors for a page like /authors.
+ *
+ * This is an unstyled list of all authors. Apply a class to the component to style it.
+ */
+
+export interface Props {
+  class?: string;
+  showPosts?: boolean;
+  authors: "all" | string[];
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+const {
+  class: className = "",
+  authors = [],
+  showPosts = false,
+  headingLevel = 2,
+} = Astro.props;
+
+let authorsFromProps = undefined;
+if (authors !== "all") {
+  authorsFromProps = await Promise.all(
+    authors.map((author) => getEntryBySlug("author", author))
+  );
+}
+
+const allauthors = await getCollection("author");
+
+const renderAuthors = authors === "all" ? allauthors : authorsFromProps;
+---
+
+<ul class={className}>
+  {
+    !!renderAuthors &&
+      renderAuthors
+        .filter((author) => !!author?.slug)
+        .map((author) => {
+          if (!author || !author.slug) return null;
+          return (
+            <li>
+              <AuthorInfo
+                authorId={author.slug}
+                showPosts={showPosts}
+                headingLevel={headingLevel}
+              />
+            </li>
+          );
+        })
+  }
+</ul>

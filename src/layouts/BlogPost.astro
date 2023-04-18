@@ -4,7 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import AuthorInfo from "../components/AuthorInfo.astro";
+import AuthorList from "../components/AuthorList.astro";
 import TopicList from "../components/TopicList.astro";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -29,9 +29,14 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
         font-style: italic;
       }
       .author-list {
+        list-style: none;
         padding-left: 0;
         display: grid;
         gap: 1rem;
+      }
+      .author-list :global(> li) {
+        border: 2px solid #333;
+        border-radius: 16px;
       }
     </style>
   </head>
@@ -65,11 +70,12 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
             !!authors.length && (
               <>
                 <h2>Author{authors.length > 1 ? "s" : ""}</h2>
-                <ul class="author-list">
-                  {authors.map((authorId) => (
-                    <AuthorInfo authorId={authorId} headingLevel={3} />
-                  ))}
-                </ul>
+                <AuthorList
+                  class="author-list"
+                  authors={authors}
+                  headingLevel={3}
+                  showPosts={false}
+                />
               </>
             )
           }

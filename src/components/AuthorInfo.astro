@@ -34,7 +34,7 @@ const authorPosts = posts
 ---
 
 <div class="author">
-  <H>{firstname} {lastname}</H>
+  <H>{firstname}&nbsp;{lastname}</H>
   <img src={avatar} alt={`${firstname} ${lastname}`} />
   <div><Content /></div>
 
@@ -74,7 +74,6 @@ const authorPosts = posts
     display: flex;
     flex-direction: column;
     align-items: start;
-    border: 2px solid #ccc;
     padding: 1rem;
     border-radius: 1rem;
   }

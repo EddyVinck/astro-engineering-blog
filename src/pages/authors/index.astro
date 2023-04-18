@@ -1,10 +1,32 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/AuthorsOverview.astro";
-
-const authors = await getCollection("author");
+import Layout from "../../layouts/Page.astro";
+import AuthorList from "../../components/AuthorList.astro";
 ---
 
-<Layout title="Authors" description="A list of authors" authors={authors}>
-  <p>Here you can find all the authors of this blog.</p>
+<Layout
+  title="Authors"
+  description="All the people who contributed to our blog"
+>
+  <AuthorList class="author-list" authors="all" headingLevel={2} showPosts />
 </Layout>
+
+<style>
+  .author-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+  .author-list :global(> li) {
+    border: 2px solid #333;
+    border-radius: 16px;
+  }
+  @media screen and (min-width: 768px) {
+    .author-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .author-list :global(.author) {
+  }
+</style>
