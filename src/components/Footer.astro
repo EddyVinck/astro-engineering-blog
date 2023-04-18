@@ -1,13 +1,16 @@
 ---
+import { BRAND } from "../consts";
+
 const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} YOUR NAME HERE. All rights reserved.
+  &copy; {today.getFullYear()}
+  {BRAND}. All rights reserved.
 </footer>
 <style>
-	footer {
-		padding: 25px;
-		text-align: center;
-	}
+  footer {
+    padding: 25px;
+    text-align: center;
+  }
 </style>
