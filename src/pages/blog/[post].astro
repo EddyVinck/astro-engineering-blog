@@ -5,10 +5,12 @@ import BlogPost from "../../layouts/BlogPost.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { post: post.slug },
-    props: post,
-  }));
+  return posts
+    .filter((post) => post.data.draft === false)
+    .map((post) => ({
+      params: { post: post.slug },
+      props: post,
+    }));
 };
 type Props = CollectionEntry<"blog">;
 

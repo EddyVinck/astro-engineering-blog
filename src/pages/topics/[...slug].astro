@@ -19,6 +19,7 @@ const { Content } = await topic.render();
 
 const posts = await getCollection("blog");
 const topicPosts = posts
+  .filter((post) => post.data.draft === false)
   .filter((post) => post.data.topics.includes(topic.slug))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---

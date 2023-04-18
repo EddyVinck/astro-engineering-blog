@@ -25,6 +25,7 @@ const socials = [
 
 const posts = await getCollection("blog");
 const authorPosts = posts
+  .filter((post) => post.data.draft === false)
   .filter((post) => post.data.authors.includes(authorId))
   .map((post) => ({
     url: `/blog/${post.slug}`,

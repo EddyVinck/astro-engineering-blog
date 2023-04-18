@@ -18,6 +18,7 @@ const blog = defineCollection({
     authors: z.array(z.string()).default(["anonymous"]), // the same as the filename without the extension
     topics: z.array(z.string()).default([]), // the same as the filename without the extension
     title: z.string(),
+    draft: z.boolean().default(false),
     description: z.string(),
     // Transform string to Date object
     pubDate: z
