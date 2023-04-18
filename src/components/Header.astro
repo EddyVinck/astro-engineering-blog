@@ -1,38 +1,74 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+import HeaderDropdown from "./HeaderDropdown.astro";
+import { getCollection } from "astro:content";
+
+const topics = await getCollection("topic");
 ---
 
 <header>
   <div class="container">
     <h2>
-      {SITE_TITLE}
+      <a href="/">
+        {SITE_TITLE}
+      </a>
     </h2>
+
     <nav>
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/authors">Authors</HeaderLink>
-      <HeaderLink href="/topics">Topics</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/search">Search</HeaderLink>
-      <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
-        Twitter
-      </HeaderLink>
-      <HeaderLink href="https://github.com/withastro/astro" target="_blank">
-        GitHub
-      </HeaderLink>
+      <ul>
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/authors">Authors</HeaderLink>
+        <HeaderDropdown href="/topics" linkText="Topics">
+          {
+            topics.map((topic) => (
+              <HeaderLink href={`/topics/${topic.slug}`}>
+                {topic.data.title}
+              </HeaderLink>
+            ))
+          }
+        </HeaderDropdown>
+        <HeaderLink href="/about">About</HeaderLink>
+        <HeaderLink href="/search">Search</HeaderLink>
+        <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
+          Twitter
+        </HeaderLink>
+        <HeaderLink href="https://github.com/withastro/astro" target="_blank">
+          GitHub
+        </HeaderLink>
+      </ul>
     </nav>
   </div>
 </header>
 
 <style>
   header {
-    padding: 1rem 0.5rem;
+    padding: 2rem 0.5rem 6rem;
     background: #000;
     color: #fff;
     margin: 0em 0 2em;
   }
   h2 {
     margin: 0 0 0.5em 0;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  header :global(a) {
+    color: #8adcff;
+  }
+  ul :global(> li) {
+    padding-bottom: 0.5rem;
+  }
+  h2 > a {
+    color: #fff;
+    text-decoration: none;
   }
 </style>
