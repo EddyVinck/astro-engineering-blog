@@ -19,7 +19,7 @@
     "@astrojs/rss": "^2.3.2",
     "@astrojs/sitemap": "^1.2.2",
     "@astrojs/solid-js": "^2.1.0",
-    "astro": "^2.2.1",
+    "astro": "^2.3.0",
     "fuse.js": "^6.6.2",
     "solid-js": "^1.7.3"
   }
