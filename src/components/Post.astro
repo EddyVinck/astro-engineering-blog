@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+const { post } = Astro.props;
+const { data, slug } = post;
+const { title, authors, topics, pubDate, description } = data;
+---
+
+<div class="post">
+  <h2><a href={`/blog/${slug}/`}>{title}</a></h2>
+  <p>{description}</p>
+  <div class="info">
+    <FormattedDate date={pubDate} />
+    <p>Written by: {authors.join(", ")}</p>
+    <p>Topics: {topics.join(", ")}</p>
+  </div>
+</div>
+
+<style>
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  h2 a {
+    color: inherit;
+    text-decoration: none;
+    color: #333;
+  }
+  h2 a:hover {
+    text-decoration: underline;
+  }
+  .post > p {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+  }
+  .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .info :global(*) {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #666;
+  }
+  .info :global(*:nth-child(n + 2))::before {
+    font-size: 0.9rem;
+    content: "•";
+    margin: 0 0.5rem;
+  }
+</style>

@@ -2,14 +2,14 @@
 import Layout from "../../layouts/Page.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import PostList from "../../components/PostList.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = (await getCollection("blog"))
     .filter((post) => post.data.draft === false)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   return paginate(posts, {
-    pageSize: 2,
+    pageSize: 4,
   });
 };
 
@@ -24,25 +24,7 @@ const { page } = Astro.props;
   title="Blog"
   description="Our engineers write about the technical challanges they have faced."
 >
-  <ul class="post-list">
-    {
-      page.data.map((post) => {
-        const { data, slug } = post;
-        const { title, authors, topics, pubDate, description } = data;
-        return (
-          <li>
-            <a href={`/blog/${slug}/`}>
-              <h2>{title}</h2>
-            </a>
-            <p>{description}</p>
-            <FormattedDate date={pubDate} />
-            <p>Written by: {authors.join(", ")}</p>
-            <p>Topics: {topics.join(", ")}</p>
-          </li>
-        );
-      })
-    }
-  </ul>
+  <PostList posts={page.data} />
   <div class="pagination">
     {page.url.prev ? <a href={page.url.prev}>Previous</a> : <span />}
     {page.url.current ? <span>Page {page.currentPage}</span> : <span />}
@@ -83,8 +65,15 @@ const { page } = Astro.props;
     margin: 0;
   }
   .pagination {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
     width: 100%;
+  }
+  .pagination span {
+    text-align: center;
+  }
+  .pagination span + a {
+    text-align: right;
   }
 </style>

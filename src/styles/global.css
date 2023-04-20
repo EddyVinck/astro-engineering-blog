@@ -77,3 +77,15 @@ blockquote {
   margin: 0px;
   font-style: italic;
 }
+
+.btn {
+  display: inline-block;
+  background-color: #3273dc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}

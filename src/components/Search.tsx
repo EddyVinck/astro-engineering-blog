@@ -52,6 +52,7 @@ export default function Search({ searchList }: Props) {
   return (
     <div>
       <label for="search">Search blog posts:</label>
+      <br />
       <input
         id="search"
         onInput={(e) => setQuery(e.target.value)}
@@ -63,7 +64,7 @@ export default function Search({ searchList }: Props) {
           {posts().map((post) => (
             <li>
               <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-              {post.data.description}
+              <p>{post.data.description}</p>
             </li>
           ))}
         </ul>

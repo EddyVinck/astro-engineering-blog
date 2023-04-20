@@ -1,4 +1,5 @@
 ---
+import PostList from "../../components/PostList.astro";
 import Layout from "../../layouts/Page.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 
@@ -33,13 +34,7 @@ const topicPosts = posts
       topicPosts.length > 0 && (
         <>
           <h2>Posts about {topic.data.title.toLowerCase()}</h2>
-          <ul>
-            {topicPosts.map((post) => (
-              <li>
-                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-              </li>
-            ))}
-          </ul>
+          <PostList posts={topicPosts} />
         </>
       )
     }

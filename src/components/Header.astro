@@ -9,7 +9,7 @@ const topics = await getCollection("topic");
 
 <header>
   <div class="header-bar">
-    <div class="container">
+    <div class="header-container">
       <div class="title-container">
         <h2 class="title">
           <a href="/">
@@ -63,20 +63,55 @@ const topics = await getCollection("topic");
             }
           </HeaderDropdown>
           <HeaderLink href="/about">About</HeaderLink>
-          <HeaderLink href="/search">Search</HeaderLink>
           <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
             Twitter
           </HeaderLink>
           <HeaderLink href="https://github.com/withastro/astro" target="_blank">
             GitHub
           </HeaderLink>
+          <HeaderLink href="/search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <title>Search</title>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              ></path>
+            </svg>
+          </HeaderLink>
         </ul>
       </nav>
     </div>
   </div>
 </header>
+<!-- <div class="header-bottom"></div> -->
 
 <style>
+  .header-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav ul :global(svg) {
+    height: 1.5rem;
+  }
+  .header-bottom {
+    padding: 2rem 0;
+    background: #000;
+    width: 100%;
+  }
   header {
     position: sticky;
     top: 0;
@@ -84,10 +119,8 @@ const topics = await getCollection("topic");
     display: flex;
     flex-direction: column;
     padding: 1rem 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background: #000;
     color: #fff;
-    margin: 0em 0 2em;
     width: 100%;
   }
 
@@ -103,17 +136,17 @@ const topics = await getCollection("topic");
     padding: 0;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
   }
   header :global(a) {
     color: #d4f2ff;
   }
   ul :global(> li) {
-    padding-bottom: 0.5rem;
+    /* padding-bottom: 0.5rem; */
+    margin-right: 1rem;
   }
   .title {
-    margin: 0 0 1rem;
     font-size: 1.5rem;
     font-weight: 500;
   }
@@ -128,7 +161,7 @@ const topics = await getCollection("topic");
     color: #fff;
     display: none;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     header {
       padding: 0;
     }
@@ -173,6 +206,8 @@ const topics = await getCollection("topic");
       display: block;
     }
     .title-container {
+      width: 100%;
+      padding: 0.8rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;

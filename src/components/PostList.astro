@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Post from "./Post.astro";
+
+type Props = {
+  posts: CollectionEntry<"blog">[];
+};
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => {
+      return (
+        <li>
+          <Post post={post} />
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li (time) {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .post-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .post-list li h2 {
+    margin: 0;
+  }
+  .post-list li p {
+    margin: 0;
+  }
+</style>
