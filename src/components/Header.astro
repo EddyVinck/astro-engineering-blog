@@ -8,49 +8,96 @@ const topics = await getCollection("topic");
 ---
 
 <header>
-  <div class="container">
-    <h2>
-      <a href="/">
-        {SITE_TITLE}
-      </a>
-    </h2>
+  <div class="header-bar">
+    <div class="container">
+      <div class="title-container">
+        <h2 class="title">
+          <a href="/">
+            {SITE_TITLE}
+          </a>
+        </h2>
 
-    <nav>
-      <ul>
-        <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/blog">Blog</HeaderLink>
-        <HeaderLink href="/authors">Authors</HeaderLink>
-        <HeaderDropdown href="/topics" linkText="Topics">
-          {
-            topics.map((topic) => (
-              <HeaderLink href={`/topics/${topic.slug}`}>
-                {topic.data.title}
-              </HeaderLink>
-            ))
-          }
-        </HeaderDropdown>
-        <HeaderLink href="/about">About</HeaderLink>
-        <HeaderLink href="/search">Search</HeaderLink>
-        <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
-          Twitter
-        </HeaderLink>
-        <HeaderLink href="https://github.com/withastro/astro" target="_blank">
-          GitHub
-        </HeaderLink>
-      </ul>
-    </nav>
+        <button class="hamburger">
+          <svg
+            class="open"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <nav>
+        <ul>
+          <HeaderLink href="/blog">Blog</HeaderLink>
+          <HeaderLink href="/authors">Authors</HeaderLink>
+          <HeaderDropdown href="/topics" linkText="Topics">
+            {
+              topics.map((topic) => (
+                <HeaderLink href={`/topics/${topic.slug}`}>
+                  {topic.data.title}
+                </HeaderLink>
+              ))
+            }
+          </HeaderDropdown>
+          <HeaderLink href="/about">About</HeaderLink>
+          <HeaderLink href="/search">Search</HeaderLink>
+          <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">
+            Twitter
+          </HeaderLink>
+          <HeaderLink href="https://github.com/withastro/astro" target="_blank">
+            GitHub
+          </HeaderLink>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <style>
   header {
-    padding: 2rem 0.5rem 6rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
     background: #000;
     color: #fff;
     margin: 0em 0 2em;
+    width: 100%;
   }
-  h2 {
-    margin: 0 0 0.5em 0;
+
+  .header-bar {
+    width: 100%;
+    padding: 0 0.5rem;
+    position: sticky;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+    background: #000;
   }
   ul {
     list-style: none;
@@ -67,8 +114,81 @@ const topics = await getCollection("topic");
   ul :global(> li) {
     padding-bottom: 0.5rem;
   }
-  h2 > a {
+  .title {
+    margin: 0 0 1rem;
+  }
+  .title > a {
     color: #fff;
     text-decoration: none;
   }
+
+  .hamburger {
+    background-color: transparent;
+    color: #fff;
+    display: none;
+  }
+  @media (max-width: 768px) {
+    header {
+      padding: 0;
+    }
+    .title {
+      margin: 0;
+    }
+    ul {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    ul :global(> li) {
+      padding-bottom: 0.5rem;
+    }
+    .hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      width: 32px;
+      height: 32px;
+      border: 2px solid white;
+      border-radius: 100px;
+    }
+    .hamburger:active {
+      background-color: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+    .hamburger.open svg.open {
+      display: none;
+    }
+    .hamburger svg.close {
+      display: none;
+    }
+    .hamburger.open svg.close {
+      display: block;
+    }
+    .title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav {
+      display: none;
+    }
+    nav.open {
+      display: block;
+    }
+  }
 </style>
+
+<script>
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector("nav");
+
+  if (!hamburger || !nav) {
+    throw new Error("Could not find hamburger or nav");
+  }
+
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    hamburger.classList.toggle("open");
+  });
+</script>
