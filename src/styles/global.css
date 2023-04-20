@@ -24,7 +24,8 @@ body {
 .container {
   padding: 20px;
   max-width: 728px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 main h1,
@@ -49,6 +50,9 @@ textarea {
 }
 input {
   font-size: 16px;
+}
+main {
+  margin-top: 2rem;
 }
 content {
   line-height: 1.6;

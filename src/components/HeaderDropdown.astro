@@ -58,6 +58,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 
   li ul :global(a) {
     padding: 0.5rem;
+    font-size: 0.9rem;
   }
 
   li:hover > ul {
@@ -79,7 +80,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
     width: 12px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     li ul,
     li:hover > ul,
     svg {

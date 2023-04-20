@@ -4,7 +4,7 @@ import PostList from "./PostList.astro";
 
 const posts = (await getCollection("blog"))
   .filter((post) => post.data.draft === false)
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
 

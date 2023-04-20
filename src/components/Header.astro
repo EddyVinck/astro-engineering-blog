@@ -91,7 +91,6 @@ const topics = await getCollection("topic");
     </div>
   </div>
 </header>
-<!-- <div class="header-bottom"></div> -->
 
 <style>
   .header-container {
@@ -108,9 +107,10 @@ const topics = await getCollection("topic");
     height: 1.5rem;
   }
   .header-bottom {
-    padding: 2rem 0;
+    padding: 4rem 0;
     background: #000;
     width: 100%;
+    color: #fff;
   }
   header {
     position: sticky;
@@ -140,7 +140,7 @@ const topics = await getCollection("topic");
     justify-content: space-between;
   }
   header :global(a) {
-    color: #d4f2ff;
+    color: #fff;
   }
   ul :global(> li) {
     /* padding-bottom: 0.5rem; */
@@ -149,6 +149,7 @@ const topics = await getCollection("topic");
   .title {
     font-size: 1.5rem;
     font-weight: 500;
+    margin: 0;
   }
 
   .title > a {
