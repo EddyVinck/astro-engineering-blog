@@ -6,9 +6,15 @@ import Footer from "../components/Footer.astro";
 type Props = {
   title: string;
   description: string;
+  frontmatter?: {
+    title: string;
+    description: string;
+  };
 };
 
-const { title, description } = Astro.props;
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || Astro.props.title;
+const description = frontmatter?.description || Astro.props.description;
 ---
 
 <html lang="en">

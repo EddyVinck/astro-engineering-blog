@@ -20,12 +20,12 @@ const topicPosts = posts
   .filter((post) => post.data.draft === false)
   .filter((post) => post.data.topics.includes(topic.slug))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+
+const title = topic.data.title;
+const description = `All posts about ${title}`;
 ---
 
-<Layout
-  title="Topics"
-  description="An overview of all the various topics on our blog."
->
+<Layout title={title} description={description}>
   <section>
     <h1>{topic.data.title}</h1>
     <Content />

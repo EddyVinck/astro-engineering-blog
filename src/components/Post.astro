@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
 type Props = {
@@ -8,7 +8,17 @@ type Props = {
 
 const { post } = Astro.props;
 const { data, slug } = post;
-const { title, authors, topics, pubDate, description } = data;
+const { title, authors: authorIds, topics, pubDate, description } = data;
+
+const authorData = await getCollection("author");
+const authors = authorData
+  .filter((author) => authorIds.includes(author.slug))
+  .map(
+    (author) =>
+      `${author.data.firstname}${
+        author.data.lastname ? ` ${author.data.lastname}` : ""
+      }`
+  );
 ---
 
 <div class="post">
@@ -16,8 +26,10 @@ const { title, authors, topics, pubDate, description } = data;
   <p>{description}</p>
   <div class="info">
     <FormattedDate date={pubDate} />
-    <p>Written by: {authors.join(", ")}</p>
-    <p>Topics: {topics.join(", ")}</p>
+    <p>
+      written by {authors.join(" & ")}
+    </p>
+    <p>topics: {topics.join(", ")}</p>
   </div>
 </div>
 
