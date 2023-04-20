@@ -84,7 +84,8 @@ const topics = await getCollection("topic");
     display: flex;
     flex-direction: column;
     padding: 1rem 0;
-    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
     color: #fff;
     margin: 0em 0 2em;
     width: 100%;
@@ -93,11 +94,8 @@ const topics = await getCollection("topic");
   .header-bar {
     width: 100%;
     padding: 0 0.5rem;
-    position: sticky;
-    top: 100px;
-    left: 0;
+    position: relative;
     z-index: 1;
-    background: #000;
   }
   ul {
     list-style: none;
@@ -109,14 +107,17 @@ const topics = await getCollection("topic");
     justify-content: space-between;
   }
   header :global(a) {
-    color: #8adcff;
+    color: #d4f2ff;
   }
   ul :global(> li) {
     padding-bottom: 0.5rem;
   }
   .title {
     margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
+
   .title > a {
     color: #fff;
     text-decoration: none;
@@ -135,11 +136,17 @@ const topics = await getCollection("topic");
       margin: 0;
     }
     ul {
+      padding: 1rem 0.5rem;
       flex-direction: column;
       align-items: flex-start;
     }
-    ul :global(> li) {
-      padding-bottom: 0.5rem;
+    nav ul :global(> li) {
+      width: 100%;
+    }
+    nav ul :global(> li a) {
+      display: inline-block;
+      padding: 0.5rem 0;
+      width: 100%;
     }
     .hamburger {
       display: flex;
@@ -172,6 +179,13 @@ const topics = await getCollection("topic");
     }
     nav {
       display: none;
+
+      left: 0;
+      top: 100%;
+      position: absolute;
+      padding: 0 20px;
+      background-color: #000;
+      width: 100%;
     }
     nav.open {
       display: block;

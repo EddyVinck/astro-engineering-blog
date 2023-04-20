@@ -67,16 +67,23 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
   ul {
     display: none;
     position: absolute;
+    padding: 0.5rem 0;
     top: 100%;
     left: 0;
     width: 200px;
-    background-color: #000000;
-    border: 1px solid #404040;
-    border-radius: 8px;
+    background-color: #151515;
   }
 
   svg {
     margin-left: 0.3rem;
     width: 12px;
+  }
+
+  @media (max-width: 768px) {
+    li ul,
+    li:hover > ul,
+    svg {
+      display: none;
+    }
   }
 </style>

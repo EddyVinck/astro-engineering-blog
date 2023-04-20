@@ -23,9 +23,10 @@ body {
 
 .container {
   padding: 20px;
-  max-width: 65ch;
+  max-width: 728px;
   margin: 0 auto;
 }
+
 main h1,
 main h2,
 main h3,

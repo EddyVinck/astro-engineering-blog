@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/Page.astro
-title: About
+title: "About"
 description: "Lorem ipsum dolor sit amet"
 ---
 
