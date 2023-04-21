@@ -9,20 +9,17 @@ const { pathname } = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 ---
 
-<li>
-  <a href={href} class:list={[className, { active: isActive }]} {...props}>
+<li class="group relative">
+  <a
+    href={href}
+    class:list={[
+      "inline-block hover:underline text-white flex items-center",
+      className,
+      { underline: isActive },
+    ]}
+    {...props}
+  >
     <slot />
   </a>
+  <slot name="dropdown" />
 </li>
-<style>
-  a {
-    display: inline-block;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  a.active {
-    text-decoration: underline;
-  }
-</style>

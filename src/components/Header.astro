@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+import HeaderDropdownLink from "./HeaderDropdownLink.astro";
 import { SITE_TITLE } from "../consts";
 import HeaderDropdown from "./HeaderDropdown.astro";
 import { getCollection } from "astro:content";
@@ -7,40 +8,48 @@ import { getCollection } from "astro:content";
 const topics = await getCollection("topic");
 ---
 
-<header>
-  <div class="header-bar">
-    <div class="header-container">
-      <div class="title-container">
-        <h2 class="title">
-          <a href="/">
+<header
+  class="top- sticky left-0 flex w-full flex-col bg-black py-4 text-white"
+>
+  <div class="z-1 relative px-2">
+    <div
+      class="mx-auto flex w-full max-w-6xl items-center justify-between px-4"
+    >
+      <div class="title-container flex w-full justify-between py-3">
+        <h2 class="m-0 text-xl font-medium">
+          <a href="/" class="text-white no-underline">
             {SITE_TITLE}
           </a>
         </h2>
 
-        <button class="hamburger">
+        <button
+          class="hamburger flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-transparent p-1 text-white active:bg-white active:text-black md:hidden"
+        >
           <svg
-            class="open"
+            class="open h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            class="h-6 w-6"
           >
+            <title>Open</title>
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
           </svg>
           <svg
-            class="close"
+            class="close h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            class="h-6 w-6"
           >
+            <title>Close</title>
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -49,16 +58,20 @@ const topics = await getCollection("topic");
         </button>
       </div>
 
-      <nav>
-        <ul>
+      <nav
+        class="absolute left-0 top-full hidden w-full bg-black px-5 md:static md:block md:p-0"
+      >
+        <ul
+          class="m-0 flex list-none flex-col items-start gap-2 px-2 py-4 pb-8 md:flex-row md:items-center md:justify-between md:p-0 md:py-2"
+        >
           <HeaderLink href="/blog">Blog</HeaderLink>
           <HeaderLink href="/authors">Authors</HeaderLink>
           <HeaderDropdown href="/topics" linkText="Topics">
             {
               topics.map((topic) => (
-                <HeaderLink href={`/topics/${topic.slug}`}>
+                <HeaderDropdownLink href={`/topics/${topic.slug}`}>
                   {topic.data.title}
-                </HeaderLink>
+                </HeaderDropdownLink>
               ))
             }
           </HeaderDropdown>
@@ -70,13 +83,14 @@ const topics = await getCollection("topic");
             GitHub
           </HeaderLink>
           <HeaderLink href="/search">
+            <span class="mr-2 md:sr-only"> Search</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="h-6 w-6"
             >
               <title>Search</title>
               <path
@@ -93,139 +107,14 @@ const topics = await getCollection("topic");
 </header>
 
 <style>
-  .header-container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  nav ul :global(svg) {
-    height: 1.5rem;
-  }
-  .header-bottom {
-    padding: 4rem 0;
-    background: #000;
-    width: 100%;
-    color: #fff;
-  }
-  header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0;
-    background: #000;
-    color: #fff;
-    width: 100%;
-  }
-
-  .header-bar {
-    width: 100%;
-    padding: 0 0.5rem;
-    position: relative;
-    z-index: 1;
-  }
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header :global(a) {
-    color: #fff;
-  }
-  ul :global(> li) {
-    /* padding-bottom: 0.5rem; */
-    margin-right: 1rem;
-  }
-  .title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 0;
-  }
-
-  .title > a {
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .hamburger {
-    background-color: transparent;
-    color: #fff;
+  .hamburger.open svg.open {
     display: none;
   }
-  @media (max-width: 800px) {
-    header {
-      padding: 0;
-    }
-    .title {
-      margin: 0;
-    }
-    ul {
-      padding: 1rem 0.5rem;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    nav ul :global(> li) {
-      width: 100%;
-    }
-    nav ul :global(> li a) {
-      display: inline-block;
-      padding: 0.5rem 0;
-      width: 100%;
-    }
-    .hamburger {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px;
-      width: 32px;
-      height: 32px;
-      border: 2px solid white;
-      border-radius: 100px;
-    }
-    .hamburger:active {
-      background-color: #fff;
-      color: #000;
-      cursor: pointer;
-    }
-    .hamburger.open svg.open {
-      display: none;
-    }
-    .hamburger svg.close {
-      display: none;
-    }
-    .hamburger.open svg.close {
-      display: block;
-    }
-    .title-container {
-      width: 100%;
-      padding: 0.8rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav {
-      display: none;
-
-      left: 0;
-      top: 100%;
-      position: absolute;
-      padding: 0 20px;
-      background-color: #000;
-      width: 100%;
-    }
-    nav.open {
-      display: block;
-    }
+  .hamburger svg.close {
+    display: none;
+  }
+  .hamburger.open svg.close {
+    display: block;
   }
 </style>
 
@@ -238,7 +127,7 @@ const topics = await getCollection("topic");
   }
 
   hamburger.addEventListener("click", () => {
-    nav.classList.toggle("open");
+    nav.classList.toggle("hidden");
     hamburger.classList.toggle("open");
   });
 </script>

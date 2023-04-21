@@ -22,10 +22,7 @@ body {
 }
 
 .container {
-  padding: 20px;
-  max-width: 728px;
-  margin-left: auto;
-  margin-right: auto;
+  @apply mx-auto max-w-[728px] p-5;
 }
 
 main h1,

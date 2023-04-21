@@ -1,90 +1,34 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import HeaderLink from "./HeaderLink.astro";
 
 type Props = HTMLAttributes<"a"> & {
   linkText: string;
 };
 
-const { href, class: className, linkText, ...props } = Astro.props;
-
-const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, "");
+const { href, class: className, linkText } = Astro.props;
 ---
 
-<li>
-  <a href={href} class:list={[className, { active: isActive }]} {...props}
-    >{linkText}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-6 h-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
-    </svg>
-  </a>
-  <ul>
+<HeaderLink href={href} class={className}>
+  {linkText}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="ml-1 hidden w-3 md:block"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+  </svg>
+
+  <ul
+    slot="dropdown"
+    class="absolute left-0 top-full m-0 hidden w-52 list-none bg-gray-950 p-0 px-2 md:group-hover:block"
+  >
     <slot />
   </ul>
-</li>
-
-<style>
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    position: relative;
-    display: inline-block;
-  }
-
-  li > a {
-    position: relative;
-    display: flex;
-    align-items: center;
-    z-index: 1;
-    text-decoration: none;
-  }
-  a.active {
-    text-decoration: underline;
-  }
-
-  li ul :global(a) {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-
-  li:hover > ul {
-    display: block;
-  }
-
-  ul {
-    display: none;
-    position: absolute;
-    padding: 0.5rem 0;
-    top: 100%;
-    left: 0;
-    width: 200px;
-    background-color: #151515;
-  }
-
-  svg {
-    margin-left: 0.3rem;
-    width: 12px;
-  }
-
-  @media (max-width: 800px) {
-    li ul,
-    li:hover > ul,
-    svg {
-      display: none;
-    }
-  }
-</style>
+</HeaderLink>

@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import HeaderLink from "./HeaderLink.astro";
+
+type Props = HTMLAttributes<"a">;
+
+const { href } = Astro.props;
+const className = Astro.props.class ? ` ${Astro.props.class}` : "";
+---
+
+<HeaderLink href={href} class={"py-2 w-full" + className}>
+  <slot />
+</HeaderLink>
