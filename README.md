@@ -1,26 +1,60 @@
-# Astro Starter Kit: Blog
+# Astro Starter Kit: Engineering Blog
+
+This template was built to easily create an engineering blog for one or multiple authors.
+
+## Getting started
 
 ```
-npm create astro@latest -- --template blog
+npm create astro@latest -- --template eddyvinck/astro-engineering-blog
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+### Configuration
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Edit the values in `src/consts.ts` to match your brand or company:
 
+```ts
+export const BRAND = "Acme";
+export const SITE_TITLE = "Acme Engineering";
+export const SITE_URL = "https://astro-engineering-blog.netlify.app";
+export const SITE_DESCRIPTION = "Welcome to the Acme Engineering blog!";
+export const PAGINATION_POSTS_PER_PAGE = 5;
+```
 
-![blog](https://user-images.githubusercontent.com/4677417/186189140-4ef17aac-c3c9-4918-a8c2-ce86ba1bb394.png)
+Change any lines or add more in the `<head>` tags in `src/components/BaseHead.astro`, like the favicon:
 
-Features:
+```html
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+```
 
+## Features
+
+- ✅ Easy configuration
 - ✅ Minimal styling (make it your own!)
 - ✅ 100/100 Lighthouse performance
 - ✅ SEO-friendly with canonical URLs and OpenGraph data
 - ✅ Sitemap support
 - ✅ RSS Feed support
 - ✅ Markdown & MDX support
+- ✅ Search functionality
+- ✅ Author system
+- ✅ Multiple authors per post (co-authoring)
+- ✅ Topics
+- ✅ Blog pagination
+- ✅ Blog drafts
+
+## Technologies used
+
+- Astro as the framework tying everything together
+- Solid.js for search (all `.tsx` files) and any other features that require JavaScript
+- Tailwind CSS for styling
+- Fuse.js for search logic
+- Everything is written in TypeScript 💙
+
+## Thank you ❤️
+
+- Astro team & all the other library authors
+- The maintainers of the [Astro blog template](https://github.com/withastro/astro/tree/latest/examples/blog?on=github) which was used as a base for this template
+- [FrontValue](https://frontvalue.nl/), for letting me work on this template during work hours
 
 ## 🚀 Project Structure
 
@@ -47,7 +81,7 @@ The `src/content/` directory contains "collections" of related Markdown and MDX 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
-## 🧞 Commands
+## CLI Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -60,10 +94,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+### Learn more about Astro
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Check out [the documentation](https://docs.astro.build) or jump into the [Discord server](https://astro.build/chat).
