@@ -5,7 +5,7 @@ authors:
   - eddy-vinck
 description: "How to get started with your new engineering blog"
 pubDate: "April 24 2023"
-heroImage: "/placeholder-hero.jpg"
+heroImage: "/img/readme.jpg"
 ---
 
 # Astro Starter Kit: Engineering Blog
