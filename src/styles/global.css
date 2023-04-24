@@ -1,32 +1,29 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*,
-:before,
-:after {
-  box-sizing: border-box;
+@layer components {
+  .btn {
+    @apply inline-block cursor-pointer rounded-md border-none bg-blue-600 px-5 py-2.5 text-base text-white no-underline transition hover:bg-blue-700;
+  }
+}
+
+@layer utilities {
+  .dot-separated > *:nth-child(n + 2)::before {
+    font-size: 0.9rem;
+    content: "•";
+    margin: 0 0.5rem;
+  }
+  .container {
+    @apply mx-auto max-w-[728px] p-5;
+  }
 }
 
 body {
   font-family: Verdana, sans-serif;
   margin: auto;
-  text-align: left;
-  background-color: #fff;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  color: #444;
 }
 
-.container {
-  @apply mx-auto max-w-[728px] p-5;
-}
-
-.btn {
-  @apply inline-block cursor-pointer rounded-md border-none bg-blue-600 px-5 py-2.5 text-base text-white no-underline transition hover:bg-blue-700;
-}
 a {
   @apply text-blue-500;
 }

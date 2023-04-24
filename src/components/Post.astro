@@ -1,14 +1,14 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
+import { PostListItem } from "./PostListItem";
 
 type Props = {
   post: CollectionEntry<"blog">;
 };
 
 const { post } = Astro.props;
-const { data, slug } = post;
-const { title, authors: authorIds, topics, pubDate, description } = data;
+const { data } = post;
+const { authors: authorIds } = data;
 
 const authorData = await getCollection("author");
 const authors = authorData
@@ -19,60 +19,14 @@ const authors = authorData
         author.data.lastname ? ` ${author.data.lastname}` : ""
       }`
   );
+
+const finalPost: CollectionEntry<"blog"> = {
+  ...post,
+  data: {
+    ...data,
+    authors,
+  },
+};
 ---
 
-<div class="post flex flex-col gap-1">
-  <h2 class="m-0 text-lg">
-    <a
-      class="text-gray-700 text-inherit no-underline hover:underline"
-      href={`/blog/${slug}/`}>{title}</a>
-  </h2>
-  <p>{description}</p>
-  <div class="info">
-    <FormattedDate date={pubDate} />
-    <p>
-      written by {authors.join(" & ")}
-    </p>
-    <p>topics: {topics.join(", ")}</p>
-  </div>
-</div>
-
-<style>
-  .post {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-  h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-  h2 a {
-    color: inherit;
-    text-decoration: none;
-    color: #333;
-  }
-  h2 a:hover {
-    text-decoration: underline;
-  }
-  .post > p {
-    font-size: 0.9rem;
-    font-style: italic;
-    margin: 0;
-  }
-  .info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .info :global(*) {
-    font-size: 0.9rem;
-    margin: 0;
-    color: #666;
-  }
-  .info :global(*:nth-child(n + 2))::before {
-    font-size: 0.9rem;
-    content: "•";
-    margin: 0 0.5rem;
-  }
-</style>
+<PostListItem post={finalPost} />

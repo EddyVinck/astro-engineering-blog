@@ -8,6 +8,7 @@ const posts = (await getCollection("blog"))
 ---
 
 <div>
-  <p>Search</p>
+  <h1>Search</h1>
+  <p>Search for any title, description or post content</p>
   <Search client:load searchList={posts} />
 </div>

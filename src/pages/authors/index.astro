@@ -7,26 +7,18 @@ import AuthorList from "../../components/AuthorList.astro";
   title="Authors"
   description="All the people who contributed to our blog"
 >
-  <AuthorList class="author-list" authors="all" headingLevel={2} showPosts />
+  <h1>Authors</h1>
+  <AuthorList
+    class="author-list grid list-none grid-cols-1 gap-4 pl-0 md:grid-cols-2"
+    authors="all"
+    headingLevel={2}
+    showPosts
+  />
 </Layout>
 
 <style>
-  .author-list {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
   .author-list :global(> li) {
     border: 2px solid #333;
     border-radius: 16px;
-  }
-  @media screen and (min-width: 768px) {
-    .author-list {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .author-list :global(.author) {
   }
 </style>

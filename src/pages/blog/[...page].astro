@@ -3,13 +3,14 @@ import Layout from "../../layouts/Page.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import PostList from "../../components/PostList.astro";
+import { PAGINATION_POSTS_PER_PAGE } from "../../consts";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = (await getCollection("blog"))
     .filter((post) => post.data.draft === false)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   return paginate(posts, {
-    pageSize: 4,
+    pageSize: PAGINATION_POSTS_PER_PAGE,
   });
 };
 
@@ -24,6 +25,7 @@ const { page } = Astro.props;
   title="Blog"
   description="Our engineers write about the technical challanges they have faced."
 >
+  <h1>Blog</h1>
   <div class="grid gap-8">
     <PostList posts={page.data} />
     <div class="grid w-full grid-cols-3 justify-between">
