@@ -21,8 +21,12 @@ const authors = authorData
   );
 ---
 
-<div class="post">
-  <h2><a href={`/blog/${slug}/`}>{title}</a></h2>
+<div class="post flex flex-col gap-1">
+  <h2 class="m-0 text-lg">
+    <a
+      class="text-gray-700 text-inherit no-underline hover:underline"
+      href={`/blog/${slug}/`}>{title}</a>
+  </h2>
   <p>{description}</p>
   <div class="info">
     <FormattedDate date={pubDate} />

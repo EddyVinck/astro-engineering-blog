@@ -10,14 +10,8 @@ const posts = (await getCollection("blog"))
 
 <div>
   <h2>Latest</h2>
-  <div class="post-list">
+  <div class="flex flex-col items-start gap-8">
     {posts.length > 0 && <PostList posts={posts} />}
+    <a class="btn" href="/blog">See all posts</a>
   </div>
-  <a class="btn" href="/blog">See all posts</a>
 </div>
-
-<style>
-  .post-list {
-    margin-bottom: 2rem;
-  }
-</style>

@@ -17,7 +17,6 @@ body {
   background-color: #fff;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  line-height: 1.5;
   color: #444;
 }
 
@@ -25,37 +24,14 @@ body {
   @apply mx-auto max-w-[728px] p-5;
 }
 
-main h1,
-main h2,
-main h3,
-main h4,
-main h5,
-main h6,
-main strong,
-main b {
-  color: #222;
+.btn {
+  @apply inline-block cursor-pointer rounded-md border-none bg-blue-600 px-5 py-2.5 text-base text-white no-underline transition hover:bg-blue-700;
 }
 a {
-  color: #3273dc;
-}
-nav a {
-  margin-right: 10px;
-}
-textarea {
-  width: 100%;
-  font-size: 16px;
-}
-input {
-  font-size: 16px;
+  @apply text-blue-500;
 }
 main {
-  margin-top: 2rem;
-}
-content {
-  line-height: 1.6;
-}
-table {
-  width: 100%;
+  @apply mt-8;
 }
 img {
   max-width: 100%;
@@ -77,16 +53,4 @@ blockquote {
   padding: 2px 0px 2px 20px;
   margin: 0px;
   font-style: italic;
-}
-
-.btn {
-  display: inline-block;
-  background-color: #3273dc;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
 }

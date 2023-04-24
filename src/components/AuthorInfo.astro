@@ -1,5 +1,6 @@
 ---
 import { getEntryBySlug, getCollection } from "astro:content";
+import Heading from "./Heading.astro";
 
 export interface Props {
   authorId: string;
@@ -8,7 +9,6 @@ export interface Props {
 }
 
 const { authorId, showPosts, headingLevel = 2 } = Astro.props;
-const H = `h${headingLevel}`;
 
 const entry = await getEntryBySlug("author", authorId);
 if (!entry) {
@@ -33,66 +33,46 @@ const authorPosts = posts
   }));
 ---
 
-<div class="author">
-  <H>{firstname}&nbsp;{lastname}</H>
-  <img src={avatar} alt={`${firstname} ${lastname}`} />
+<div class="not-prose flex flex-col items-start gap-4 rounded-2xl p-4">
+  <Heading headingLevel={headingLevel} class="text-xl">
+    {firstname}&nbsp;{lastname}
+  </Heading>
+  <img
+    class="h-24 w-24 rounded-full"
+    src={avatar}
+    alt={`${firstname} ${lastname}`}
+  />
   <div><Content /></div>
 
-  {
-    showPosts && authorPosts.length > 0 && (
-      <>
-        <p>My posts ({authorPosts.length})</p>
-        <ul>
-          {authorPosts.map((post) => (
-            <li>
-              <a href={post.url}>{post.data.title}</a>
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
+  <div class="flex flex-col gap-2">
+    {
+      showPosts && authorPosts.length > 0 && (
+        <>
+          <p class="mb-0">My posts ({authorPosts.length})</p>
+          <ul class="list-outside list-disc pl-4">
+            {authorPosts.map((post) => (
+              <li>
+                <a href={post.url}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
 
-  {
-    socials.length > 0 && (
-      <>
-        <p>My links</p>
-        <ul class="socials">
-          {socials.map((social) => (
-            <li>
-              <a href={social.url}>{social.name}</a>
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
+    {
+      socials.length > 0 && (
+        <>
+          <p class="mb-0">My links</p>
+          <ul class="m-0 flex list-none gap-4 p-0">
+            {socials.map((social) => (
+              <li>
+                <a href={social.url}>{social.name}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </div>
 </div>
-
-<style>
-  .author {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 1rem;
-    border-radius: 1rem;
-  }
-  .author img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-  }
-  .author .socials {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-  }
-  p {
-    margin-bottom: 0;
-  }
-  ul {
-    padding-left: 16px;
-  }
-</style>
