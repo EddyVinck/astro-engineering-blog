@@ -5,7 +5,10 @@ import LatestPosts from "../components/LatestPosts.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <img src={new URL("/placeholder-social.jpg", Astro.url).toString()} />
+  <img
+    src={new URL("/placeholder-social.jpg", Astro.url).toString()}
+    alt="Astro Engineering Blog template: Multiple authors, co-authoring, topics, search, and more"
+  />
   <h1>{SITE_TITLE}</h1>
   <p>
     Welcome to the Engineering Blog Starter template for <a

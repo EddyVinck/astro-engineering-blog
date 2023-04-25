@@ -7,7 +7,7 @@ export const PostListItem = ({ post }: { post: CollectionEntry<"blog"> }) => {
     <div class="post flex flex-col gap-1">
       <h2 class="m-0 text-lg">
         <a
-          class="text-blue-500 no-underline hover:underline"
+          class="text-blue-600 no-underline hover:underline"
           href={`/blog/${slug}/`}
         >
           {title}

@@ -25,7 +25,7 @@ body {
 }
 
 a {
-  @apply text-blue-500;
+  @apply text-blue-600;
 }
 main {
   @apply mt-8;
