@@ -53,7 +53,7 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
               <>
                 <h2>Author{authors.length > 1 ? "s" : ""}</h2>
                 <AuthorList
-                  class="author-list"
+                  class="author-list grid list-none grid-cols-1 gap-4 pl-0"
                   authors={authors}
                   headingLevel={3}
                   showPosts={false}
@@ -65,5 +65,10 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
       </article>
     </main>
     <Footer />
+    <style>
+      .author-list :global(> li) {
+        @apply rounded-3xl border-2 border-gray-600;
+      }
+    </style>
   </body>
 </html>
