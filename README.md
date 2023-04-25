@@ -4,6 +4,8 @@
 
 This template was built to easily create an engineering blog for one or multiple authors.
 
+Demo: https://astro-engineering-blog.netlify.app/
+
 ## Getting started
 
 ```
