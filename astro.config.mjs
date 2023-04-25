@@ -5,11 +5,15 @@ import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import { SITE_URL } from "./src/consts.ts";
 
+import image from "@astrojs/image";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
   markdown: {
-    drafts: true,
+    drafts: true
   },
-  integrations: [mdx({ drafts: true }), sitemap(), solidJs(), tailwind()],
+  integrations: [mdx({
+    drafts: true
+  }), sitemap(), solidJs(), tailwind(), image()]
 });
