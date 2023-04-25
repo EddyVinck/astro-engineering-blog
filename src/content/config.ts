@@ -1,15 +1,18 @@
 import { defineCollection, z } from "astro:content";
 
 const author = defineCollection({
-  schema: z.object({
-    firstname: z.string(),
-    lastname: z.string(),
-    avatar: z.string().optional(),
-    // socials
-    twitter: z.string().optional(),
-    github: z.string().optional(),
-    linkedin: z.string().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      firstname: z.string(),
+      lastname: z.string(),
+      avatar: image().refine((img) => img.width >= 96, {
+        message: "Author avatar image must be at least 96 pixels wide!",
+      }),
+      // socials
+      twitter: z.string().optional(),
+      github: z.string().optional(),
+      linkedin: z.string().optional(),
+    }),
 });
 
 const blog = defineCollection({

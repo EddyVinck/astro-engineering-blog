@@ -1,7 +1,7 @@
 ---
 firstname: Eddy
 lastname: Vinck
-avatar: "/authors/eddy-vinck.jpg"
+avatar: "../../assets/images/author/eddy-vinck.jpg" # will resolve to "src/content/assets/authors/{author}.jpg"
 twitter: https://twitter.com/eddyvinckk
 linkedin: https://linkedin.com/in/eddyvinck
 github: https://github.com/EddyVinck

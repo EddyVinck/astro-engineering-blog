@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import AuthorList from "../components/AuthorList.astro";
 import TopicList from "../components/TopicList.astro";
+import { Image } from "astro:assets";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -45,7 +46,11 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
     <Header />
     <main class="container">
       <article class="prose">
-        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+        {
+          heroImage && (
+            <Image width={661.17} height={330.5} src={heroImage} alt="" />
+          )
+        }
         <h1 class="title">{title}</h1>
         <FormattedDate date={pubDate} />
         {

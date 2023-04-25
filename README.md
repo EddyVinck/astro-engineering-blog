@@ -32,6 +32,7 @@ Change any lines or add more in the `<head>` tags in `src/components/BaseHead.as
 - ✅ Minimal styling (make it your own!)
 - ✅ 100/100 Lighthouse performance
 - ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Astro [assets](https://docs.astro.build/en/guides/assets/) for optimized images
 - ✅ Sitemap support
 - ✅ RSS Feed support
 - ✅ Markdown & MDX support

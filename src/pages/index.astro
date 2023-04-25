@@ -2,14 +2,14 @@
 import Layout from "../layouts/Page.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import LatestPosts from "../components/LatestPosts.astro";
-import { Image, Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
+import heroImage from "../../public/placeholder-social.jpg";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Image
-    width={688}
-    aspectRatio="2:1"
-    src={"/images//placeholder-social.jpg"}
+    width={668}
+    src={heroImage}
     alt="Astro Engineering Blog template: Multiple authors, co-authoring, topics, search, and more"
   />
   <h1>{SITE_TITLE}</h1>

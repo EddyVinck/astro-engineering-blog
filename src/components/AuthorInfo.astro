@@ -1,6 +1,7 @@
 ---
 import { getEntryBySlug, getCollection } from "astro:content";
 import Heading from "./Heading.astro";
+import { Image } from "astro:assets";
 
 export interface Props {
   authorId: string;
@@ -37,9 +38,11 @@ const authorPosts = posts
   <Heading headingLevel={headingLevel} class="text-xl">
     {firstname}&nbsp;{lastname}
   </Heading>
-  <img
+  <Image
     class="h-24 w-24 rounded-full"
     src={avatar}
+    width={96}
+    width={96}
     alt={`${firstname} ${lastname}`}
   />
   <div><Content /></div>
