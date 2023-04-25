@@ -7,8 +7,4 @@ const posts = (await getCollection("blog"))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---
 
-<div>
-  <h1>Search</h1>
-  <p>Search for any title, description or post content</p>
-  <Search client:load searchList={posts} />
-</div>
+<Search client:load searchList={posts} />
