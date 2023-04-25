@@ -1,3 +1,5 @@
+![Astro Engineering Blog template: Multiple authors, co-authoring, topics, search, and more](./public/placeholder-social.jpg)
+
 # Astro Starter Kit: Engineering Blog
 
 This template was built to easily create an engineering blog for one or multiple authors.
