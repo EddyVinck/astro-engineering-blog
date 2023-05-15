@@ -9,7 +9,7 @@ const topics = await getCollection("topic");
 ---
 
 <header
-  class="sticky left-0 top-0 flex w-full flex-col bg-black py-4 text-white"
+  class="sticky left-0 top-0 flex w-full flex-col bg-header py-4 text-header-foreground"
 >
   <div class="z-1 relative px-2">
     <div
@@ -17,13 +17,13 @@ const topics = await getCollection("topic");
     >
       <div class="title-container flex w-full justify-between py-3">
         <h2 class="m-0 text-xl font-medium">
-          <a href="/" class="text-white no-underline">
+          <a href="/" class="text-header-foreground no-underline">
             {SITE_TITLE}
           </a>
         </h2>
 
         <button
-          class="hamburger flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-transparent p-1 text-white active:bg-white active:text-black md:hidden"
+          class="hamburger flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-header-foreground bg-transparent p-1 text-header-foreground active:bg-white active:text-black md:hidden"
         >
           <svg
             class="open h-6"
@@ -59,7 +59,7 @@ const topics = await getCollection("topic");
       </div>
 
       <nav
-        class="absolute left-0 top-full hidden w-full bg-black px-5 md:static md:block md:p-0"
+        class="absolute left-0 top-full hidden w-full bg-header px-5 md:static md:block md:p-0"
       >
         <ul
           class="m-0 flex list-none flex-col items-start gap-2 px-2 py-4 pb-8 md:flex-row md:items-center md:justify-between md:p-0 md:py-2"

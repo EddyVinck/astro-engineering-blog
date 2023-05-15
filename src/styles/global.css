@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply inline-block cursor-pointer rounded-md border-none bg-blue-600 px-5 py-2.5 text-base text-white no-underline transition hover:bg-blue-700;
+    @apply inline-block cursor-pointer rounded-md border-none bg-primary-500 px-5 py-2.5 text-base text-primary-foreground no-underline transition hover:bg-primary-600;
   }
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 a {
-  @apply text-blue-600;
+  @apply text-link;
 }
 main {
   @apply mt-8;
