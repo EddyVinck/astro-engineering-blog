@@ -88,8 +88,10 @@ export default function Search({ searchList }: Props) {
 
       <Show when={posts().length > 0}>
         <ul class="grid list-none gap-6 p-0">
-          {posts().map((post) => (
-            <li class="p-0">
+          {posts().map((post, index) => (
+            <li class="p-0 animate-stagger" style={{ 
+              '--animation-order': index + 1
+            }}>
               <PostListItem post={post} />
             </li>
           ))}
