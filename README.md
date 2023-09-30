@@ -46,6 +46,7 @@ Change any lines or add more in the `<head>` tags in `src/components/BaseHead.as
 - ✅ Topics
 - ✅ Blog pagination
 - ✅ Blog drafts
+- ✅ Dark mode (system preference + toggle button)
 
 ## Technologies used
 
