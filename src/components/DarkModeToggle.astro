@@ -48,10 +48,11 @@ function setDarkMode() {
       ? "dark"
       : "light";
     localStorage.setItem("darkMode", theme);
+    document.querySelector("html").dataset.theme = theme;
   }
 }
-setDarkMode();
 document.addEventListener("astro:after-swap", setDarkMode);
+setDarkMode();
 document.querySelector("#light-btn").addEventListener("click", () => {
   localStorage.setItem("darkMode", "light");
   setDarkMode();
