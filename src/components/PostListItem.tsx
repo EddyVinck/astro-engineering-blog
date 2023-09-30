@@ -14,7 +14,7 @@ export const PostListItem = ({ post }: { post: CollectionEntry<"blog"> }) => {
         </a>
       </h2>
       <p class="text-sm italic">{description}</p>
-      <div class="info dot-separated flex items-center text-sm text-gray-600">
+      <div class="info dot-separated flex items-center text-sm text-gray-600 dark:text-white/50">
         <time datetime={pubDate.toISOString()}>
           {pubDate.toLocaleDateString("en-us", {
             year: "numeric",

@@ -24,9 +24,9 @@ const description = frontmatter?.description || Astro.props.description;
     <ViewTransitions />
   </head>
 
-  <body>
+  <body class="dark:bg-slate-950">
     <Header transition:persist />
-    <main class="container prose">
+    <main class="container prose dark:prose-invert">
       <slot />
     </main>
     <Footer />
