@@ -51,3 +51,28 @@ blockquote {
   margin: 0px;
   font-style: italic;
 }
+
+@keyframes animateStagger {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-stagger {
+  animation-name: animateStagger;
+  animation-duration: 350ms;
+  animation-delay: calc(var(--animation-order) * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+@media (prefers-reduced-motion) {
+  .animate-stagger {
+    animation: none;
+  }
+}

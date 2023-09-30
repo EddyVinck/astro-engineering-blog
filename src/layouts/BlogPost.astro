@@ -7,6 +7,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import AuthorList from "../components/AuthorList.astro";
 import TopicList from "../components/TopicList.astro";
 import { Image } from "astro:assets";
+import { ViewTransitions } from "astro:transitions";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -17,10 +18,11 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
+    <ViewTransitions />
   </head>
 
   <body>
-    <Header />
+    <Header transition:persist />
     <main class="container">
       <article class="prose mx-auto">
         {
