@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
   <body>
     <Header />
     <main class="container">
-      <article class="prose">
+      <article class="prose mx-auto">
         {
           heroImage && (
             <Image width={661.17} height={330.5} src={heroImage} alt="" />
@@ -65,8 +65,8 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
       </article>
     </main>
     <Footer />
-    <style>
-      .author-list :global(> li) {
+    <style is:global>
+      .author-list > li {
         @apply rounded-3xl border-2 border-gray-600;
       }
     </style>

@@ -16,8 +16,8 @@ import AuthorList from "../../components/AuthorList.astro";
   />
 </Layout>
 
-<style>
-  .author-list :global(> li) {
+<style is:global>
+  .author-list > li {
     @apply rounded-3xl border-2 border-gray-600;
   }
 </style>
