@@ -65,7 +65,7 @@ blockquote {
 
 .animate-stagger {
   animation-name: animateStagger;
-  animation-duration: 250ms;
+  animation-duration: 350ms;
   animation-delay: calc(var(--animation-order) * 100ms);
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
