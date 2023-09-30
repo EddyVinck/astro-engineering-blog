@@ -4,6 +4,7 @@ import HeaderDropdownLink from "./HeaderDropdownLink.astro";
 import { SITE_TITLE } from "../consts";
 import HeaderDropdown from "./HeaderDropdown.astro";
 import { getCollection } from "astro:content";
+import DarkModeToggle from "./DarkModeToggle.astro";
 
 const topics = await getCollection("topic");
 ---
@@ -83,7 +84,7 @@ const topics = await getCollection("topic");
             GitHub
           </HeaderLink>
           <HeaderLink href="/search">
-            <span class="mr-2 md:sr-only"> Search</span>
+            <span class="mr-2 md:sr-only">Search</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -100,6 +101,7 @@ const topics = await getCollection("topic");
               ></path>
             </svg>
           </HeaderLink>
+          <DarkModeToggle />
         </ul>
       </nav>
     </div>

@@ -22,6 +22,7 @@
 body {
   font-family: Verdana, sans-serif;
   margin: auto;
+  @apply dark:bg-slate-950
 }
 
 a {
@@ -37,6 +38,7 @@ img {
 code {
   padding: 2px 5px;
   background-color: #f2f2f2;
+  @apply dark:bg-slate-800
 }
 pre {
   padding: 1rem;

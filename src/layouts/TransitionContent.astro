@@ -26,7 +26,10 @@ const description = frontmatter?.description || Astro.props.description;
 
   <body>
     <Header transition:persist />
-    <main class="container prose" transition:animate="initial">
+    <main
+      class="container prose dark:prose-invert"
+      transition:animate="initial"
+    >
       <slot />
     </main>
     <Footer />
