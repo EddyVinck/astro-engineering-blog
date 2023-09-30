@@ -8,18 +8,12 @@ import { SITE_URL } from "./src/consts.ts";
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  markdown: {
-    drafts: true,
-  },
-  experimental: {
-    assets: true,
-  },
   integrations: [
-    mdx({
-      drafts: true,
-    }),
+    mdx(),
     sitemap(),
-    solidJs(),
+    solidJs({
+      include: "**.tsx",
+    }),
     tailwind(),
   ],
 });
