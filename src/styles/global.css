@@ -70,3 +70,9 @@ blockquote {
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
 }
+
+@media (prefers-reduced-motion) {
+  .animate-stagger {
+    animation: none;
+  }
+}
