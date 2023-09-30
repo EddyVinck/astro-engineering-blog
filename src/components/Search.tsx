@@ -90,7 +90,7 @@ export default function Search({ searchList }: Props) {
         <ul class="grid list-none gap-6 p-0">
           {posts().map((post, index) => (
             <li class="p-0 animate-stagger" style={{ 
-              '--animation-order': index
+              '--animation-order': index + 1
             }}>
               <PostListItem post={post} />
             </li>
