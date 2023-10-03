@@ -121,15 +121,23 @@ const topics = await getCollection("topic");
 </style>
 
 <script>
-  const hamburger = document.querySelector(".hamburger");
-  const nav = document.querySelector("nav");
+  function setupHamburgerMenuToggle() {
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector("header nav");
 
-  if (!hamburger || !nav) {
-    throw new Error("Could not find hamburger or nav");
+    if (!hamburger || !nav) {
+      throw new Error("Could not find hamburger or nav");
+    }
+
+    hamburger.addEventListener("click", () => {
+      nav.classList.toggle("hidden");
+      hamburger.classList.toggle("open");
+    });
   }
 
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("hidden");
-    hamburger.classList.toggle("open");
+  // When Astro navigates pages using <ViewTransitions /> the click event needs to be added again
+  // See: https://docs.astro.build/en/guides/view-transitions/#astropage-load
+  document.addEventListener("astro:page-load", () => {
+    setupHamburgerMenuToggle();
   });
 </script>
