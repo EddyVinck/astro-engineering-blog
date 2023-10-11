@@ -51,14 +51,25 @@ function setDarkMode() {
     document.querySelector("html").dataset.theme = theme;
   }
 }
-document.addEventListener("astro:after-swap", setDarkMode);
+
+function setupDarkModeButtons() {
+  document.querySelector("#light-btn").addEventListener("click", () => {
+    localStorage.setItem("darkMode", "light");
+    setDarkMode();
+  });
+  document.querySelector("#dark-btn").addEventListener("click", () => {
+    localStorage.setItem("darkMode", "dark");
+    setDarkMode();
+  });
+}
+
 setDarkMode();
-document.querySelector("#light-btn").addEventListener("click", () => {
-  localStorage.setItem("darkMode", "light");
+setupDarkModeButtons();
+
+// When Astro navigates pages using <ViewTransitions /> the click event needs to be added again
+// See: https://docs.astro.build/en/guides/view-transitions/#astropage-load
+document.addEventListener("astro:after-swap", () => {
   setDarkMode();
-});
-document.querySelector("#dark-btn").addEventListener("click", () => {
-  localStorage.setItem("darkMode", "dark");
-  setDarkMode();
+  setupDarkModeButtons();
 });
 </script>
