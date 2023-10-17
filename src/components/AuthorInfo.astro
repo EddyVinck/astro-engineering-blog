@@ -55,7 +55,12 @@ const authorPosts = posts
           <ul class="list-outside list-disc pl-4">
             {authorPosts.map((post) => (
               <li>
-                <a href={post.url}>{post.data.title}</a>
+                <a
+                  class="text-link no-underline hover:underline"
+                  href={post.url}
+                >
+                  {post.data.title}
+                </a>
               </li>
             ))}
           </ul>
@@ -70,7 +75,12 @@ const authorPosts = posts
           <ul class="m-0 flex list-none gap-4 p-0">
             {socials.map((social) => (
               <li>
-                <a href={social.url}>{social.name}</a>
+                <a
+                  class="text-link no-underline hover:underline"
+                  href={social.url}
+                >
+                  {social.name}
+                </a>
               </li>
             ))}
           </ul>
