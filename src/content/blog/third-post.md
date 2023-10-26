@@ -1,4 +1,5 @@
 ---
+id: "third-post"
 title: "Third post"
 topics: []
 authors:

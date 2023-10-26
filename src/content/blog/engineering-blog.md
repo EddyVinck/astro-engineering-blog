@@ -1,4 +1,5 @@
 ---
+id: "engineering-blog"
 title: "README: What's included in this Engineering Blog template?"
 topics: ["docs"]
 authors:

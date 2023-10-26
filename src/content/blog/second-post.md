@@ -1,4 +1,5 @@
 ---
+id: "second-post"
 title: "Second post"
 topics: []
 authors:

@@ -1,4 +1,5 @@
 ---
+id: "first-post"
 title: "First post"
 topics: ["front-end"]
 authors:

@@ -18,6 +18,7 @@ const author = defineCollection({
 const blog = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
+    id: z.string().min(1).max(120),
     authors: z.array(z.string()).default(["anonymous"]), // the same as the filename without the extension
     topics: z.array(z.string()).default([]), // the same as the filename without the extension
     title: z.string(),
