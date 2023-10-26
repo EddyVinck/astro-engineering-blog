@@ -21,9 +21,11 @@
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/solid-js": "^3.0.1",
     "@astrojs/tailwind": "^5.0.0",
+    "@nanostores/solid": "^0.4.2",
     "appwrite": "^13.0.0",
     "astro": "^3.2.0",
     "fuse.js": "^6.6.2",
+    "nanostores": "^0.9.4",
     "node-appwrite": "^11.0.0",
     "solid-js": "^1.7.3",
     "tailwindcss": "^3.3.1"
