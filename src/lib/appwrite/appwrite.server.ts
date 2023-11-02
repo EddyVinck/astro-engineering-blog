@@ -6,6 +6,7 @@ import {
   ID,
   type Models,
   Teams,
+  Query,
 } from "node-appwrite";
 import type { CollectionEntry } from "astro:content";
 
@@ -56,14 +57,15 @@ const initializeEmojiReactionsCollection = async () => {
   }
 };
 
-interface PostReactions {
+export interface PostReactions {
   id: string;
   likes: number;
   hearts: number;
   poops: number;
   parties: number;
 }
-interface PostReactionsDocument extends Models.Document, PostReactions {}
+export type PostReactionOption = Exclude<keyof PostReactions, "id">;
+export interface PostReactionsDocument extends Models.Document, PostReactions {}
 
 const getInitialPostData = (id: string): PostReactions => ({
   id: id,
@@ -146,4 +148,70 @@ export const tryInitNewBlogPostsReactionsInDatabaseCollection = async (
         );
       });
   }
+};
+
+export const getPostReactionsById = async (id: string) => {
+  try {
+    const list = await appwriteDatabases.listDocuments<PostReactionsDocument>(
+      import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+      import.meta.env.PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID,
+      [Query.equal("id", [id])]
+    );
+
+    if (list.total !== 1) {
+      throw new Error(
+        `Got ${list.total} results when querying post reactions for "${id}"`
+      );
+    }
+
+    const document = list.documents[0];
+
+    return document;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(
+        `Could not get post reaction data for "${id}"`,
+        error.message
+      );
+    }
+    return null;
+  }
+};
+
+export const incrementEmojiReactionCount = async (
+  articleId: string,
+  emojiType: PostReactionOption
+) => {
+  console.log({ emojiType, articleId });
+  const list = await appwriteDatabases.listDocuments<PostReactionsDocument>(
+    import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+    import.meta.env.PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID,
+    [Query.equal("id", [articleId])]
+  );
+
+  if (list.total !== 1) {
+    throw new Error(
+      `Got ${list.total} results when querying post reactions for "${articleId}"`
+    );
+  }
+
+  const document = list.documents[0];
+
+  if (!document) {
+    return;
+  }
+
+  const prevCount = document[emojiType];
+  const newCount = prevCount + 1;
+
+  const result = await appwriteDatabases.updateDocument<PostReactionsDocument>(
+    import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+    import.meta.env.PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID,
+    document.$id,
+    {
+      [emojiType]: newCount,
+    }
+  );
+
+  return result;
 };
