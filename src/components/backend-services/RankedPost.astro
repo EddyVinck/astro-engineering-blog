@@ -1,0 +1,71 @@
+---
+import type { PostReactions } from "../../lib/appwrite/appwrite.server";
+
+export type PostDataWithReactions = PostReactions & {
+  href: string;
+  title: string;
+};
+
+export type Props = PostDataWithReactions & { rank: number };
+
+const { title, href, likes, hearts, parties, poops, rank } = Astro.props;
+---
+
+<div
+  class={`not-prose flex gap-1 rounded-md border p-2 ${
+    rank === 1
+      ? "shadow-lg dark:bg-white/5 shadow-primary-500/40 md:scale-105 mb-2"
+      : ""
+  }`}
+>
+  <p class="mt-1">
+    <span
+      class="tex-tenter mr-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-primary-foreground"
+    >
+      {
+        rank < 4 ? (
+          <span class="text-3xl">
+            {rank === 1
+              ? "🥇"
+              : rank === 2
+              ? "🥈"
+              : rank === 3
+              ? "🥉"
+              : `#${rank}`}
+          </span>
+        ) : (
+          <span>#{rank}</span>
+        )
+      }
+    </span>
+  </p>
+  <div class="flex w-full flex-col gap-2">
+    <h2 class="m-0 text-lg">
+      <a class="text-link no-underline hover:underline" href={href}>
+        {title}
+      </a>
+    </h2>
+    <ul class="flex list-none justify-start gap-6">
+      <li>
+        <span class="not-sr-only">👍</span>
+        <span class="sr-only">likes:&nbsp;</span>
+        <span class="ml-1">{likes}</span>
+      </li>
+      <li>
+        <span class="not-sr-only">❤️</span>
+        <span class="sr-only">hearts:&nbsp;</span>
+        <span class="ml-1">{hearts}</span>
+      </li>
+      <li>
+        <span class="not-sr-only">🎉</span>
+        <span class="sr-only">parties:&nbsp;</span>
+        <span class="ml-1">{parties}</span>
+      </li>
+      <li>
+        <span class="not-sr-only">💩</span>
+        <span class="sr-only">poops:&nbsp;</span>
+        <span class="ml-1">{poops}</span>
+      </li>
+    </ul>
+  </div>
+</div>

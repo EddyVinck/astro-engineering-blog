@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/TransitionContent.astro";
+import { getCollection } from "astro:content";
+
+import { GET } from "../pages/api/post-reactions-ranked";
+import type { PostReactions } from "../lib/appwrite/appwrite.server";
+import RankedPost from "../components/backend-services/RankedPost.astro";
+import type { PostDataWithReactions } from "../components/backend-services/RankedPost.astro";
+
+export const prerender = false;
+
+if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
+  return Astro.redirect("/404");
+}
+
+let ranking: null | PostDataWithReactions[] = null;
+try {
+  let response = await GET({
+    ...Astro,
+    ResponseWithEncoding: Response,
+  });
+  const data = await (response as Response).json();
+  if ("error" in data) {
+    ranking = null;
+  }
+
+  ranking = [];
+  const postReactions = data as PostReactions[];
+  const posts = await getCollection("blog");
+
+  for (let i = 0; i < postReactions.length; i++) {
+    const reactions = postReactions[i];
+    if (!reactions) continue;
+    const blogData = posts.find((p) => p.slug === reactions.id);
+
+    const post: PostDataWithReactions = {
+      ...reactions,
+      href: `/blog/${blogData!.slug}`,
+      title: blogData!.data.title,
+    };
+    ranking.push(post);
+  }
+} catch (error) {
+  ranking = null;
+}
+---
+
+<Layout
+  title="Blog ranking"
+  description="These are our blog posts with the most reactions"
+>
+  <h1>Blog ranking</h1>
+  <p>Based on the emoji reactions for each post</p>
+  <div class="grid gap-8">
+    {
+      ranking &&
+        ranking.map((post, index) => <RankedPost {...post} rank={index + 1} />)
+    }
+  </div>
+</Layout>

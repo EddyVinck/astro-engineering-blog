@@ -10,12 +10,12 @@ import rateLimit, { type RateLimitHeaders } from "../../../lib/ratelimit";
 export const prerender = false;
 
 const Getlimiter = rateLimit({
-  interval: 60 * 1000, // 60 seconds
+  interval: 10 * 1000, // 10 seconds
   uniqueTokenPerInterval: 500, // Max 500 users per second
 });
 
 const Postlimiter = rateLimit({
-  interval: 60 * 1000, // 60 seconds
+  interval: 10 * 1000, // 10 seconds
   uniqueTokenPerInterval: 500, // Max 500 users per second
 });
 
@@ -25,6 +25,12 @@ export const GET: APIRoute = async ({
 }): Promise<Response> => {
   const id = params.id;
   const userIP = clientAddress;
+
+  if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
+    return new Response(JSON.stringify({ error: "internal server error" }), {
+      status: 500,
+    });
+  }
 
   let rateLimitHeaders: RateLimitHeaders | null = null;
   try {
@@ -85,10 +91,6 @@ export const GET: APIRoute = async ({
     poops: postReactions.poops,
   };
 
-  console.log(
-    `👍 Post "${postReactionData.id}" has ${postReactionData.likes} likes!`
-  );
-
   headers.append("Content-Type", "application/json");
 
   return new Response(JSON.stringify(postReactionData), {
@@ -101,9 +103,15 @@ export const POST: APIRoute = async ({ request, params, clientAddress }) => {
   const id = params.id;
   const userIP = clientAddress;
 
+  if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
+    return new Response(JSON.stringify({ error: "internal server error" }), {
+      status: 500,
+    });
+  }
+
   let rateLimitHeaders: RateLimitHeaders | null = null;
   try {
-    rateLimitHeaders = await Postlimiter.check(16, `POST-REACTIONS-${userIP}`);
+    rateLimitHeaders = await Postlimiter.check(10, `POST-REACTIONS-${userIP}`);
   } catch (error: any) {
     if ("X-RateLimit-Limit" in error && "X-RateLimit-Remaining" in error) {
       const err = error as RateLimitHeaders;
@@ -117,6 +125,7 @@ export const POST: APIRoute = async ({ request, params, clientAddress }) => {
       });
     }
   }
+
   if (
     typeof rateLimitHeaders?.["X-RateLimit-Limit"] === "undefined" ||
     typeof rateLimitHeaders?.["X-RateLimit-Remaining"] === "undefined"

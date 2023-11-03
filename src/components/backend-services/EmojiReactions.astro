@@ -36,14 +36,13 @@ if (shouldUseBackendServices) {
 <div>
   {
     shouldUseBackendServices && emojiReactions !== null && (
-      <>
-        {console.log(emojiReactions)}
+      <aside>
         <p class="text-center text-lg italic">Rate this article</p>
         <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
           <button
             id="likes-btn"
             data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105"
+            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
           >
             <span class="not-sr-only">👍</span>
             <span class="sr-only">likes: </span>
@@ -55,7 +54,7 @@ if (shouldUseBackendServices) {
           <button
             id="hearts-btn"
             data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105"
+            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
           >
             <span class="not-sr-only">❤️</span>
             <span class="sr-only">hearts: </span>
@@ -67,7 +66,7 @@ if (shouldUseBackendServices) {
           <button
             id="parties-btn"
             data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105"
+            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
           >
             <span class="not-sr-only">🎉</span>
             <span class="sr-only">parties: </span>
@@ -79,7 +78,7 @@ if (shouldUseBackendServices) {
           <button
             id="poops-btn"
             data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105"
+            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
           >
             <span class="not-sr-only">💩</span>
             <span class="sr-only">poops: </span>
@@ -88,7 +87,13 @@ if (shouldUseBackendServices) {
             </span>
           </button>
         </div>
-      </>
+        <p class="text-center text-xs italic">
+          Checkout the blog post{" "}
+          <a href="/blog-ranking" class="text-link">
+            ranking page
+          </a>
+        </p>
+      </aside>
     )
   }
 </div>
@@ -115,6 +120,12 @@ if (shouldUseBackendServices) {
       });
       if (!response.ok) {
         console.log(`could not update ${type}`);
+        if (response.status === 429) {
+          setButtonsDisabled(true);
+          setTimeout(() => {
+            setButtonsDisabled(false);
+          }, 10000);
+        }
         return;
       }
       const data = (await response.json()) as PostReactions;
@@ -123,7 +134,21 @@ if (shouldUseBackendServices) {
         btn.querySelector(`#${type}-counter`)!.textContent =
           data[type].toString();
       }
-      // incrementEmojiReactionCount(type, articleId)
+    }
+  }
+
+  function setButtonsDisabled(isDisabled: boolean) {
+    if (isDisabled) {
+      document.querySelector("#likes-btn")?.setAttribute("disabled", "true");
+
+      document.querySelector("#hearts-btn")?.setAttribute("disabled", "true");
+      document.querySelector("#parties-btn")?.setAttribute("disabled", "true");
+      document.querySelector("#poops-btn")?.setAttribute("disabled", "true");
+    } else {
+      document.querySelector("#likes-btn")?.removeAttribute("disabled");
+      document.querySelector("#hearts-btn")?.removeAttribute("disabled");
+      document.querySelector("#parties-btn")?.removeAttribute("disabled");
+      document.querySelector("#poops-btn")?.removeAttribute("disabled");
     }
   }
 

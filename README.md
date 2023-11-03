@@ -30,6 +30,26 @@ Change any lines or add more in the `<head>` tags in `src/components/BaseHead.as
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 ```
 
+You can also update the colors in `tailwind.config.css`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  theme: {
+    extend: {
+      colors: {
+        header: "#f86423",
+        "header-foreground": "#000",
+        link: "#f86423",
+        primary: {
+          500: "#f86423",
+          600: "#db5215",
+        },
+        "primary-foreground": "#000",
+      },
+```
+
 #### Optional: enable backend services
 
 You can enable backend services to your project by adding an [Appwrite](https://appwrite.io/) API key:

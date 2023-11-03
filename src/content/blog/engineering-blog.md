@@ -59,6 +59,19 @@ module.exports = {
       },
 ```
 
+#### Optional: enable backend services
+
+You can enable backend services to your project by adding an [Appwrite](https://appwrite.io/) API key:
+
+```
+# in /.env
+SECRET_APPWRITE_API_KEY=YOUR_APPWRITE_API_KEY
+PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+PUBLIC_APPWRITE_PROJECT_ID=PUBLIC_APPWRITE_PROJECT_ID
+PUBLIC_APPWRITE_DATABASE_ID=PUBLIC_APPWRITE_DATABASE_ID
+PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID=post-reactions
+```
+
 ## Features
 
 - ✅ Easy configuration
@@ -75,6 +88,8 @@ module.exports = {
 - ✅ Topics
 - ✅ Blog pagination
 - ✅ Blog drafts
+- ✅ Dark mode (system preference + toggle button)
+- ✅ Backend services (optional, uses Appwrite's free tier)
 
 ## Technologies used
 

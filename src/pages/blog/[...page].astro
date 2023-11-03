@@ -42,6 +42,17 @@ const { page } = Astro.props;
   description="Our engineers write about the technical challanges they have faced."
 >
   <h1>Blog</h1>
+  {
+    !!import.meta.env.SECRET_APPWRITE_API_KEY && (
+      <p>
+        Checkout the blog post{" "}
+        <a href="/blog-ranking" class="text-link no-underline">
+          ranking page
+        </a>
+        <span aria-hidden>🏆</span>
+      </p>
+    )
+  }
   <div class="grid gap-8">
     <PostList posts={page.data} />
     <div class="grid w-full grid-cols-3 justify-between">

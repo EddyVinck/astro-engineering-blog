@@ -150,6 +150,45 @@ export const tryInitNewBlogPostsReactionsInDatabaseCollection = async (
   }
 };
 
+export const getPostReactionsRanked = async (): Promise<
+  PostReactions[] | null
+> => {
+  try {
+    const list = await appwriteDatabases.listDocuments<PostReactionsDocument>(
+      import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
+      import.meta.env.PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID,
+      [
+        Query.orderDesc("likes"),
+        Query.orderDesc("hearts"),
+        Query.orderDesc("parties"),
+        Query.orderDesc("poops"),
+      ]
+    );
+
+    if (list.total === 0) {
+      throw new Error(
+        `Got ${list.total} results when querying post reaction rankings`
+      );
+    }
+
+    return list.documents.map((doc) => ({
+      id: doc.id,
+      likes: doc.likes,
+      hearts: doc.hearts,
+      parties: doc.parties,
+      poops: doc.poops,
+    }));
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(
+        `Could not get post reaction data for ranking`,
+        error.message
+      );
+    }
+    return null;
+  }
+};
+
 export const getPostReactionsById = async (id: string) => {
   try {
     const list = await appwriteDatabases.listDocuments<PostReactionsDocument>(
@@ -182,7 +221,6 @@ export const incrementEmojiReactionCount = async (
   articleId: string,
   emojiType: PostReactionOption
 ) => {
-  console.log({ emojiType, articleId });
   const list = await appwriteDatabases.listDocuments<PostReactionsDocument>(
     import.meta.env.PUBLIC_APPWRITE_DATABASE_ID,
     import.meta.env.PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID,
