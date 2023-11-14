@@ -25,10 +25,12 @@ const { href, class: className, linkText } = Astro.props;
       d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
   </svg>
 
-  <ul
-    slot="dropdown"
-    class="absolute left-0 top-full m-0 hidden w-52 list-none bg-header p-0 px-2 md:group-hover:block"
-  >
-    <slot />
-  </ul>
+  <div class="absolute left-0 top-full hidden pt-3 md:group-hover:block">
+    <ul
+      slot="dropdown"
+      class="m-0 w-52 list-none rounded-md bg-slate-800 p-0 px-2"
+    >
+      <slot />
+    </ul>
+  </div>
 </HeaderLink>

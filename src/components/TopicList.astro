@@ -32,7 +32,14 @@ const allTopics = (await getCollection("topic")).sort((a, b) => {
   return 0;
 });
 
-const renderTopics = topics === "all" ? allTopics : topicsFromProps;
+let renderTopics = topics === "all" ? allTopics : topicsFromProps;
+
+if (topics === "all") {
+  renderTopics = renderTopics?.concat({
+    slug: "uncategorized",
+    data: { title: "Uncategorized " },
+  } as unknown as (typeof allTopics)[number]);
+}
 ---
 
 <ul class={className}>

@@ -5,10 +5,12 @@ import { type CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const topics = await getCollection("topic");
-  return topics.map((topic) => ({
-    params: { slug: topic.slug },
-    props: topic,
-  }));
+  return topics
+    .filter((topic) => (topic.slug as string) !== "uncategorized")
+    .map((topic) => ({
+      params: { slug: topic.slug },
+      props: topic,
+    }));
 }
 type Props = CollectionEntry<"topic">;
 

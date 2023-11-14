@@ -1,7 +1,7 @@
 ---
 id: "markdown-style-guide"
 title: "Markdown Style Guide"
-topics: []
+topics: ['docs']
 draft: false
 authors:
   - anonymous

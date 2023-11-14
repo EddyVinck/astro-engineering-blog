@@ -8,6 +8,7 @@ module.exports = {
         header: "#000",
         "header-foreground": "#fff",
         link: "#2563EB",
+        "link-dark": "#3e7afe",
         primary: {
           500: "#2563EB",
           600: "#1D4ED8",

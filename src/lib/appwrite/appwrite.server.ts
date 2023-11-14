@@ -111,7 +111,7 @@ export const tryInitNewBlogPostsReactionsInDatabaseCollection = async (
   }
 
   const newPosts: PostReactions[] = [];
-  // For every new post (an ID that didnt exist), initialize a new database collection entry
+  // For every new post (an ID that didn't exist), initialize a new database collection entry
   for (let i = 0; i < posts.length; i++) {
     const post = posts[i];
     if (!post) continue;
@@ -162,6 +162,7 @@ export const getPostReactionsRanked = async (): Promise<
         Query.orderDesc("hearts"),
         Query.orderDesc("parties"),
         Query.orderDesc("poops"),
+        Query.limit(20),
       ]
     );
 

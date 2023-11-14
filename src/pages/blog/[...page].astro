@@ -42,10 +42,14 @@ const { page } = Astro.props;
   description="Our engineers write about the technical challanges they have faced."
 >
   <h1>Blog</h1>
+  <p>
+    Browse blog posts by{" "}
+    <a href="/topics" class="text-link no-underline"> topic</a>.
+  </p>
   {
     !!import.meta.env.SECRET_APPWRITE_API_KEY && (
       <p>
-        Checkout the blog post{" "}
+        Or check out the blog post{" "}
         <a href="/blog-ranking" class="text-link no-underline">
           ranking page
         </a>

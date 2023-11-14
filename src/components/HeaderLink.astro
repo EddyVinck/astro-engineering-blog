@@ -13,7 +13,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
   <a
     href={href}
     class:list={[
-      "inline-block hover:underline text-header-foreground flex items-center",
+      "inline-block hover:underline text-header-foreground dark:text-header-foreground flex items-center",
       className,
       { underline: isActive },
     ]}

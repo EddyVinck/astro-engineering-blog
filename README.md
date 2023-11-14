@@ -4,7 +4,34 @@
 
 This template was built to easily create an engineering blog for one or multiple authors.
 
-Demo: https://astro-engineering-blog.netlify.app/
+Demo: <https://astro-engineering-blog.netlify.app/>
+
+## Features
+
+- ✅ Easy configuration
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Uses [`astro:assets`](https://docs.astro.build/en/guides/assets/) for optimized images
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
+- ✅ Search functionality
+- ✅ Author system
+- ✅ Multiple authors per post (co-authoring)
+- ✅ Topics
+- ✅ Blog pagination
+- ✅ Blog drafts
+- ✅ Dark mode (system preference + toggle button)
+- ✅ [Post reactions & blog post ranking page](./src/content/blog/enabling-emoji-reactions.md) (optional, uses Appwrite's free tier)
+
+## Technologies used
+
+- Astro as the framework tying everything together
+- Solid.js for search (all `.tsx` files) and any other features that require JavaScript
+- Tailwind CSS for styling
+- Fuse.js for search logic
+- Everything is written in TypeScript 💙
 
 ## Getting started
 
@@ -42,6 +69,7 @@ module.exports = {
         header: "#f86423",
         "header-foreground": "#000",
         link: "#f86423",
+        "link-dark": "#f86423",
         primary: {
           500: "#f86423",
           600: "#db5215",
@@ -62,33 +90,6 @@ PUBLIC_APPWRITE_PROJECT_ID=PUBLIC_APPWRITE_PROJECT_ID
 PUBLIC_APPWRITE_DATABASE_ID=PUBLIC_APPWRITE_DATABASE_ID
 PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID=post-reactions
 ```
-
-## Features
-
-- ✅ Easy configuration
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Uses [`astro:assets`](https://docs.astro.build/en/guides/assets/) for optimized images
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Search functionality
-- ✅ Author system
-- ✅ Multiple authors per post (co-authoring)
-- ✅ Topics
-- ✅ Blog pagination
-- ✅ Blog drafts
-- ✅ Dark mode (system preference + toggle button)
-- ✅ Backend services (optional, uses Appwrite's free tier)
-
-## Technologies used
-
-- Astro as the framework tying everything together
-- Solid.js for search (all `.tsx` files) and any other features that require JavaScript
-- Tailwind CSS for styling
-- Fuse.js for search logic
-- Everything is written in TypeScript 💙
 
 ## Thank you ❤️
 

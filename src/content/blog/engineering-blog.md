@@ -13,7 +13,7 @@ heroImage: "/img/readme.jpg"
 
 This template was built to easily create an engineering blog for one or multiple authors.
 
-Demo: https://astro-engineering-blog.netlify.app/
+Demo: <https://astro-engineering-blog.netlify.app/>
 
 ## Getting started
 
@@ -51,6 +51,7 @@ module.exports = {
         header: "#f86423",
         "header-foreground": "#000",
         link: "#f86423",
+        "link-dark": "#f86423",
         primary: {
           500: "#f86423",
           600: "#db5215",
