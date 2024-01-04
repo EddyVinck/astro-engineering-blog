@@ -17,24 +17,25 @@ const author = defineCollection({
 
 const blog = defineCollection({
   // Type-check frontmatter using a schema
-  schema: z.object({
-    id: z.string().min(1).max(120),
-    authors: z.array(z.string()).default(["anonymous"]), // the same as the filename without the extension
-    topics: z.array(z.string()).default([]), // the same as the filename without the extension
-    title: z.string(),
-    draft: z.boolean().default(false),
-    description: z.string(),
-    // Transform string to Date object
-    pubDate: z
-      .string()
-      .or(z.date())
-      .transform((val) => new Date(val)),
-    updatedDate: z
-      .string()
-      .optional()
-      .transform((str) => (str ? new Date(str) : undefined)),
-    heroImage: z.string().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      id: z.string().min(1).max(120),
+      authors: z.array(z.string()).default(["anonymous"]), // the same as the filename without the extension
+      topics: z.array(z.string()).default([]), // the same as the filename without the extension
+      title: z.string(),
+      draft: z.boolean().default(false),
+      description: z.string(),
+      // Transform string to Date object
+      pubDate: z
+        .string()
+        .or(z.date())
+        .transform((val) => new Date(val)),
+      updatedDate: z
+        .string()
+        .optional()
+        .transform((str) => (str ? new Date(str) : undefined)),
+      heroImage: image(),
+    }),
 });
 
 const topic = defineCollection({

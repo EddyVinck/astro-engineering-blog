@@ -6,7 +6,7 @@ authors:
   - eddy-vinck
 description: "Get started with emoji reactions by adding your Appwrite API keys"
 pubDate: "Nov 06 2023"
-heroImage: "/placeholder-hero.jpg"
+heroImage: "../../assets/images/blog/enabling-emoji-reactions/post-reactions-for-article.png"
 ---
 
 Emoji reactions are reaction buttons added to every article in this Astro theme. This is an optional add-on feature which can be enabled by adding an Appwrite API key.
@@ -50,13 +50,19 @@ If everything goes well, you should be able to find the collection in your Appwr
 
 To trigger the instantiation of the post reactions for a new article, you'll need to refresh the [/blog](/blog) page so that the `getStaticPaths` function runs.
 
-## Why is my blog post not showing up on the ranking page?
+## Troubleshooting
+
+### Why is my blog post not showing up on the ranking page?
 
 You need to make sure the ID in your blog post's frontmatter section matches the ID in the Appwrite Collection for your post reactions.
 
 Here you can see the matching ID in the markdown file and in Appwrite for the article with the ID `"enabling-emoji-post-reactions"`:
 
 ![Matching IDs in the Frontmatter section and Appwrite](../../assets/images/blog/enabling-emoji-reactions/markdown-and-appwrite-matching-id.png)
+
+### Why does my blog post not show the emoji reaction buttons?
+
+Your new blog posts are automatically added to the Collection in Appwrite when visiting the `/blog` route. If you refresh that route, the emoji reactions should then show up when you open the blog post the next time.
 
 ## Removing the post reactions code from your theme
 
