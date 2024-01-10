@@ -10,7 +10,7 @@ pubDate: "Nov 06 2023"
 heroImage: "../../assets/images/blog/enabling-emoji-reactions/post-reactions-for-article.png"
 ---
 
-Emoji reactions are reaction buttons added to every article in this Astro theme. This is an optional add-on feature which can be enabled by adding an Appwrite API key.
+Emoji reactions are reaction buttons added to every article in this Astro theme. This is an optional add-on feature which can be enabled by adding an Appwrite API key and a few other environment variables.
 
 If you don't want this feature for your engineering blog, you can leave the API key value empty and the functionality will gracefully disappear without you having to remove the code. The API endpoints used will just return a `500` internal server error, the ranking page will redirect to a `404` status page, and the related components to react to posts are not rendered.
 
@@ -50,6 +50,8 @@ If everything goes well, you should be able to find the collection in your Appwr
 ## Adding new articles
 
 To trigger the instantiation of the post reactions for a new article, you'll need to refresh the [/blog](/blog) page so that the `getStaticPaths` function runs.
+
+In `src/pages/blog/[...page].astro` you can see how the implementation of `getStaticPaths` will try to initialize the post reactions in your Appwrite database collection if you have added your Appwrite API key as an environment variable.
 
 ## Troubleshooting
 

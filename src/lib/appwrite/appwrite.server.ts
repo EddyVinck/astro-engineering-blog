@@ -150,6 +150,10 @@ export const tryInitNewBlogPostsReactionsInDatabaseCollection = async (
   }
 };
 
+function getGoodReactionCount(doc: PostReactions) {
+  return doc.likes + doc.hearts + doc.parties;
+}
+
 export const getPostReactionsRanked = async (): Promise<
   PostReactions[] | null
 > => {
@@ -172,13 +176,36 @@ export const getPostReactionsRanked = async (): Promise<
       );
     }
 
-    return list.documents.map((doc) => ({
-      id: doc.id,
-      likes: doc.likes,
-      hearts: doc.hearts,
-      parties: doc.parties,
-      poops: doc.poops,
-    }));
+    return list.documents
+      .map((doc) => ({
+        id: doc.id,
+        likes: doc.likes,
+        hearts: doc.hearts,
+        parties: doc.parties,
+        poops: doc.poops,
+      }))
+      .sort((postA, postB) => {
+        const goodReactionCountA = getGoodReactionCount(postA);
+        const goodReactionCountB = getGoodReactionCount(postB);
+        const badReactionsA = postA.poops;
+        const badReactionsB = postB.poops;
+
+        // First, compare based on good reactions
+        if (goodReactionCountA > goodReactionCountB) {
+          return -1;
+        } else if (goodReactionCountA < goodReactionCountB) {
+          return 1;
+        }
+
+        // If good reactions are equal, then compare based on bad reactions
+        if (badReactionsA < badReactionsB) {
+          return -1;
+        } else if (badReactionsA > badReactionsB) {
+          return 1;
+        }
+
+        return 0;
+      });
   } catch (error) {
     if (error instanceof Error) {
       console.log(
