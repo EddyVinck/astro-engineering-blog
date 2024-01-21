@@ -8,7 +8,7 @@ import { SITE_URL } from "./src/consts.ts";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "",
+  output: "hybrid",
   adapter: netlify({
     edgeMiddleware: false,
   }),
