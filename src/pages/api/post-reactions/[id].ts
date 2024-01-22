@@ -32,6 +32,7 @@ export const GET: APIRoute = async ({
     });
   }
 
+  // #region ratelimit
   let rateLimitHeaders: RateLimitHeaders | null = null;
   try {
     rateLimitHeaders = await Getlimiter.check(25, `GET-REACTIONS-${userIP}`);
@@ -63,6 +64,7 @@ export const GET: APIRoute = async ({
     "X-RateLimit-Remaining":
       rateLimitHeaders["X-RateLimit-Remaining"].toString(),
   });
+  // #endregion
 
   if (!id) {
     return new Response(JSON.stringify({ error: "not found" }), {
@@ -109,6 +111,7 @@ export const POST: APIRoute = async ({ request, params, clientAddress }) => {
     });
   }
 
+  // #region ratelimit
   let rateLimitHeaders: RateLimitHeaders | null = null;
   try {
     rateLimitHeaders = await Postlimiter.check(10, `POST-REACTIONS-${userIP}`);
@@ -141,6 +144,7 @@ export const POST: APIRoute = async ({ request, params, clientAddress }) => {
     "X-RateLimit-Remaining":
       rateLimitHeaders["X-RateLimit-Remaining"].toString(),
   });
+  // #endregion
 
   if (!id) {
     return new Response(JSON.stringify({ error: "not found" }), {

@@ -21,6 +21,7 @@ let debugPostReactionData;
 try {
   let response = await GET({
     ...Astro,
+    // @ts-ignore
     ResponseWithEncoding: Response,
   });
   const data = await (response as Response).json();

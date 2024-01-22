@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import type { PostReactions } from "../../lib/appwrite/appwrite.server";
 import { GET } from "../../pages/api/post-reactions/[id]";
+import { EmojiReactionsButtons } from "./EmojiReactionsButtons";
 
 type Props = {
   id: CollectionEntry<"blog">["data"]["id"];
@@ -17,6 +18,7 @@ if (shouldUseBackendServices) {
   try {
     let response = await GET({
       ...Astro,
+      // @ts-ignore
       ResponseWithEncoding: Response,
       params: {
         id: Astro.props.id,
@@ -36,148 +38,11 @@ if (shouldUseBackendServices) {
 <div>
   {
     shouldUseBackendServices && emojiReactions !== null && (
-      <aside>
-        <p class="text-center text-lg italic">Rate this article</p>
-        <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-          <button
-            id="likes-btn"
-            data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
-          >
-            <span class="not-sr-only">👍</span>
-            <span class="sr-only">likes: </span>
-            <span id="likes-counter" class="ml-2 text-primary-foreground">
-              {emojiReactions.likes}
-            </span>
-          </button>
-
-          <button
-            id="hearts-btn"
-            data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
-          >
-            <span class="not-sr-only">❤️</span>
-            <span class="sr-only">hearts: </span>
-            <span id="hearts-counter" class="ml-2 text-primary-foreground">
-              {emojiReactions.hearts}
-            </span>
-          </button>
-
-          <button
-            id="parties-btn"
-            data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
-          >
-            <span class="not-sr-only">🎉</span>
-            <span class="sr-only">parties: </span>
-            <span id="parties-counter" class="ml-2 text-primary-foreground">
-              {emojiReactions.parties}
-            </span>
-          </button>
-
-          <button
-            id="poops-btn"
-            data-article={Astro.props.id}
-            class="rounded-lg bg-primary-500 p-2 text-center text-lg transition hover:bg-primary-600 active:scale-105 disabled:bg-slate-400 disabled:hover:bg-slate-500"
-          >
-            <span class="not-sr-only">💩</span>
-            <span class="sr-only">poops: </span>
-            <span id="poops-counter" class="ml-2 text-primary-foreground">
-              {emojiReactions.poops}
-            </span>
-          </button>
-        </div>
-        <p class="text-center text-xs italic">
-          Checkout the blog post{" "}
-          <a href="/blog-ranking" class="text-link">
-            ranking page
-          </a>
-        </p>
-      </aside>
+      <EmojiReactionsButtons
+        client:idle
+        articleId={Astro.props.id}
+        initialEmojiReactions={emojiReactions}
+      />
     )
   }
 </div>
-
-<script>
-  import type {
-    PostReactionOption,
-    PostReactions,
-  } from "../../lib/appwrite/appwrite.server";
-
-  async function handleVote(type: PostReactionOption, btn: EventTarget | null) {
-    if (btn instanceof HTMLButtonElement) {
-      const articleId = btn.dataset.article;
-      if (!articleId) return;
-
-      const response = await fetch(`/api/post-reactions/${articleId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: type,
-        }),
-      });
-      if (!response.ok) {
-        console.log(`could not update ${type}`);
-        if (response.status === 429) {
-          setButtonsDisabled(true);
-          setTimeout(() => {
-            setButtonsDisabled(false);
-          }, 10000);
-        }
-        return;
-      }
-      const data = (await response.json()) as PostReactions;
-
-      if (typeof data[type] === "number") {
-        btn.querySelector(`#${type}-counter`)!.textContent =
-          data[type].toString();
-      }
-    }
-  }
-
-  function setButtonsDisabled(isDisabled: boolean) {
-    if (isDisabled) {
-      document.querySelector("#likes-btn")?.setAttribute("disabled", "true");
-
-      document.querySelector("#hearts-btn")?.setAttribute("disabled", "true");
-      document.querySelector("#parties-btn")?.setAttribute("disabled", "true");
-      document.querySelector("#poops-btn")?.setAttribute("disabled", "true");
-    } else {
-      document.querySelector("#likes-btn")?.removeAttribute("disabled");
-      document.querySelector("#hearts-btn")?.removeAttribute("disabled");
-      document.querySelector("#parties-btn")?.removeAttribute("disabled");
-      document.querySelector("#poops-btn")?.removeAttribute("disabled");
-    }
-  }
-
-  function initVotingButtons() {
-    document
-      .querySelector("#likes-btn")
-      ?.addEventListener("click", function (e) {
-        handleVote("likes", e.currentTarget);
-      });
-    document
-      .querySelector("#hearts-btn")!
-      ?.addEventListener("click", function (e) {
-        handleVote("hearts", e.currentTarget);
-      });
-    document
-      .querySelector("#parties-btn")!
-      ?.addEventListener("click", function (e) {
-        handleVote("parties", e.currentTarget);
-      });
-    document
-      .querySelector("#poops-btn")!
-      ?.addEventListener("click", function (e) {
-        handleVote("poops", e.currentTarget);
-      });
-  }
-
-  // When Astro navigates pages using <ViewTransitions /> the click event needs to be added again
-  // See: https://docs.astro.build/en/guides/view-transitions/#astropage-load
-  document.addEventListener("astro:page-load", () => {
-    initVotingButtons();
-  });
-</script>
