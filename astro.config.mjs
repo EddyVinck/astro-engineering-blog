@@ -11,6 +11,7 @@ export default defineConfig({
   output: "hybrid",
   adapter: netlify({
     edgeMiddleware: false,
+    imageCDN: false,
   }),
   site: SITE_URL,
   integrations: [
