@@ -21,10 +21,10 @@ export type Props = {
 
 const { entry } = Astro.props;
 
-const test = await getEntry("blog", entry.slug);
-const { Content } = await test.render();
+const blogpost = await getEntry("blog", entry.slug);
+const { Content } = await blogpost.render();
 ---
 
-<BlogPost {...test.data}>
+<BlogPost {...blogpost.data}>
   <Content />
 </BlogPost>

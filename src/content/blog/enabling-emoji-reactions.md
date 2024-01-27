@@ -84,3 +84,9 @@ These files need to be edited:
 
 - Remove the code inside the if-statement which checks`SECRET_APPWRITE_API_KEY` from `src/pages/blog/[...page].astro`
 - Remove the `<EmojiReactions />` component from `src/layouts/BlogPost.astro`
+
+And lastly, don't forget to remove the Appwrite dependencies from your `package.json` by running this command:
+
+```bash
+npm uninstall appwrite node-appwrite
+```
