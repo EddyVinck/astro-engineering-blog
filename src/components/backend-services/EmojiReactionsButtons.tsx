@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import type {
   PostReactionOption,
   PostReactions,
@@ -9,6 +9,9 @@ type Props = {
   initialEmojiReactions: PostReactions;
 };
 
+/**
+ * This component assumes that it is only rendered when an Appwrite API key has been added
+ */
 export const EmojiReactionsButtons = ({
   articleId,
   initialEmojiReactions,
@@ -18,8 +21,19 @@ export const EmojiReactionsButtons = ({
     initialEmojiReactions
   );
 
+  onMount(async function getCurrentVotes() {
+    const response = await fetch(`/api/post-reactions/${articleId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) return;
+    const data = (await response.json()) as PostReactions;
+    setEmojiReactions(data);
+  });
+
   async function handleVote(type: PostReactionOption) {
-    console.log("click", articleId);
     if (!articleId || buttonsDisabled()) return;
 
     const response = await fetch(`/api/post-reactions/${articleId}`, {
@@ -32,7 +46,6 @@ export const EmojiReactionsButtons = ({
       }),
     });
     if (!response.ok) {
-      console.log(`could not update ${type}`);
       if (response.status === 429) {
         setButtonsDisabled(true);
         setTimeout(() => {
