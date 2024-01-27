@@ -28,7 +28,7 @@ To add this functionality, all you need to do is:
 
 It should look something like this:
 
-```
+```bash
 # in /.env
 SECRET_APPWRITE_API_KEY=YOUR_APPWRITE_API_KEY
 PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1

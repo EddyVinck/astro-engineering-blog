@@ -77,19 +77,19 @@ The blockquote element represents content that is quoted from another source, op
 
 ## List Types
 
-#### Ordered List
+### Ordered List
 
 1. First item
 2. Second item
 3. Third item
 
-#### Unordered List
+### Unordered List
 
 - List item
 - Another item
 - And another item
 
-#### Nested list
+### Nested list
 
 - Fruit
   - Apple

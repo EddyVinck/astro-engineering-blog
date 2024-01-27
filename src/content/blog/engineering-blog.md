@@ -10,7 +10,7 @@ pubDate: "April 24 2023"
 heroImage: "../../assets/images/blog/readme/readme.jpg"
 ---
 
-# Astro Starter Kit: Engineering Blog
+## Astro Starter Kit: Engineering Blog
 
 This template was built to easily create an engineering blog for one or multiple authors.
 
@@ -18,7 +18,7 @@ Demo: <https://astro-engineering-blog.netlify.app/>
 
 ## Getting started
 
-```
+```bash
 npm create astro@latest -- --template eddyvinck/astro-engineering-blog
 ```
 
@@ -111,7 +111,7 @@ PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID=post-reactions
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```
+```txt
 ├── public/
 ├── src/
 │   ├── components/
