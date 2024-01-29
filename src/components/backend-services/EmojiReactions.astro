@@ -16,6 +16,7 @@ if (!!import.meta.env.SECRET_APPWRITE_API_KEY) {
 let emojiReactions: PostReactions | null = null;
 if (shouldUseBackendServices) {
   try {
+    console.log(`Trying to enable emoji reactions for "${Astro.props.id}"...`);
     let response = await GET({
       ...Astro,
       // @ts-ignore
@@ -30,6 +31,7 @@ if (shouldUseBackendServices) {
       emojiReactions = null;
     }
   } catch (error) {
+    console.log(`🚨 Could not enable emoji reactions for "${Astro.props.id}"`);
     emojiReactions = null;
   }
 }
