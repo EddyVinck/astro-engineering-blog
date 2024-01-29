@@ -19,12 +19,11 @@ const Postlimiter = rateLimit({
   uniqueTokenPerInterval: 500, // Max 500 users per second
 });
 
-export const GET: APIRoute = async ({
-  params,
-  clientAddress,
-}): Promise<Response> => {
+export const GET: APIRoute = async ({ params, request }): Promise<Response> => {
   const id = params.id;
-  const userIP = clientAddress;
+  // This is a Netlify header. Astro has clientAddress but it doesn't work in the Netlify adapter.
+  const userIP = request.headers.get("client-ip");
+  console.log("user ip", userIP);
 
   if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
     return new Response(JSON.stringify({ error: "internal server error" }), {
@@ -101,9 +100,10 @@ export const GET: APIRoute = async ({
   });
 };
 
-export const POST: APIRoute = async ({ request, params, clientAddress }) => {
+export const POST: APIRoute = async ({ request, params }) => {
   const id = params.id;
-  const userIP = clientAddress;
+  // This is a Netlify header. Astro has clientAddress but it doesn't work in the Netlify adapter.
+  const userIP = request.headers.get("client-ip");
 
   if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
     return new Response(JSON.stringify({ error: "internal server error" }), {
