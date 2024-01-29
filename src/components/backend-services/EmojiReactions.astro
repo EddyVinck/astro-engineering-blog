@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { PostReactions } from "../../lib/appwrite/appwrite.server";
-import { GET } from "../../pages/api/post-reactions/[id]";
+import { GET } from "../../pages/api/post-reactions/[post]";
 import { EmojiReactionsButtons } from "./EmojiReactionsButtons";
 
 type Props = {
@@ -17,10 +17,8 @@ let emojiReactions: PostReactions | null = null;
 if (shouldUseBackendServices) {
   try {
     console.log(`Trying to enable emoji reactions for "${Astro.props.id}"...`);
-    let response = await GET({
-      ...Astro,
-      params: { id: Astro.params.id },
-    });
+    console.log(Astro.params);
+    let response = await GET(Astro);
     console.log(response);
     const json = await (response as Response).json();
     emojiReactions = json as PostReactions;

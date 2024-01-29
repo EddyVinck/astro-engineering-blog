@@ -9,7 +9,7 @@ import {
 export const prerender = false;
 
 export const GET: APIRoute = async ({ params }): Promise<Response> => {
-  const id = params.id;
+  const id = params.post;
 
   if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
     return new Response(JSON.stringify({ error: "internal server error" }), {
@@ -49,7 +49,7 @@ export const GET: APIRoute = async ({ params }): Promise<Response> => {
 };
 
 export const POST: APIRoute = async ({ request, params }) => {
-  const id = params.id;
+  const id = params.post;
 
   if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
     return new Response(JSON.stringify({ error: "internal server error" }), {
