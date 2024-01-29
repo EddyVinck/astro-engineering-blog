@@ -31,7 +31,10 @@ if (shouldUseBackendServices) {
       emojiReactions = null;
     }
   } catch (error) {
-    console.log(`🚨 Could not enable emoji reactions for "${Astro.props.id}"`);
+    console.log(
+      `🚨 Could not enable emoji reactions for "${Astro.props.id}. Reason:"`
+    );
+    console.log(error);
     emojiReactions = null;
   }
 }
