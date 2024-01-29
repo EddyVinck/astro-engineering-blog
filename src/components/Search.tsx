@@ -22,7 +22,6 @@ type Props = {
 
 export default function Search({ searchList }: Props) {
   const fuse = new Fuse(searchList, options);
-
   const [query, setQuery] = createSignal("");
 
   const posts = createMemo(() => {
@@ -85,13 +84,15 @@ export default function Search({ searchList }: Props) {
           value={query()}
         />
       </div>
-
       <Show when={posts().length > 0}>
         <ul class="grid list-none gap-6 p-0">
           {posts().map((post, index) => (
-            <li class="p-0 animate-stagger" style={{ 
-              '--animation-order': index + 1
-            }}>
+            <li
+              class="animate-stagger p-0"
+              style={{
+                "--animation-order": index + 1,
+              }}
+            >
               <PostListItem post={post} />
             </li>
           ))}

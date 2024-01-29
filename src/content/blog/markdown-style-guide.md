@@ -1,12 +1,13 @@
 ---
+id: "markdown-style-guide"
 title: "Markdown Style Guide"
-topics: []
-draft: false
+topics: ['docs']
 authors:
   - anonymous
 description: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
+draft: false
 pubDate: "Jul 01 2022"
-heroImage: "/placeholder-hero.jpg"
+heroImage: "../../assets/images/blog/readme/readme.jpg"
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
@@ -76,19 +77,19 @@ The blockquote element represents content that is quoted from another source, op
 
 ## List Types
 
-#### Ordered List
+### Ordered List
 
 1. First item
 2. Second item
 3. Third item
 
-#### Unordered List
+### Unordered List
 
 - List item
 - Another item
 - And another item
 
-#### Nested list
+### Nested list
 
 - Fruit
   - Apple

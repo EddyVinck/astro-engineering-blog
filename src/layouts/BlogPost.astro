@@ -8,11 +8,20 @@ import AuthorList from "../components/AuthorList.astro";
 import TopicList from "../components/TopicList.astro";
 import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
+import EmojiReactions from "../components/backend-services/EmojiReactions.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
-  Astro.props;
+const {
+  id,
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  authors,
+  topics,
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -42,6 +51,7 @@ const { title, description, pubDate, updatedDate, heroImage, authors, topics } =
         <hr />
         <slot />
         <footer>
+          <EmojiReactions id={id} />
           {
             topics.length > 0 && (
               <>

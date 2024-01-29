@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/TransitionContent.astro";
+import { getCollection } from "astro:content";
+
+import { GET } from "../pages/api/post-reactions-ranked";
+import type { PostReactions } from "../lib/appwrite/appwrite.server";
+import RankedPost from "../components/backend-services/RankedPost.astro";
+import type { PostDataWithReactions } from "../components/backend-services/RankedPost.astro";
+
+export const prerender = false;
+
+if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
+  return Astro.redirect("/404");
+}
+
+const SHOW_DEBUG_INFO = false;
+let debugRankingData: null | PostDataWithReactions[] = null;
+let debugPostData;
+let debugPostReactionData;
+
+try {
+  let response = await GET({
+    ...Astro,
+    // @ts-ignore
+    ResponseWithEncoding: Response,
+  });
+  const data = await (response as Response).json();
+  if ("error" in data) {
+    debugRankingData = null;
+  }
+
+  debugRankingData = [];
+  const postReactions = data as PostReactions[];
+  const posts = await getCollection("blog");
+  const postsWithSlug = posts.filter((p) => typeof p.slug !== "undefined");
+  debugPostData = postsWithSlug;
+  debugPostReactionData = postReactions;
+
+  for (let i = 0; i < postReactions.length; i++) {
+    const reactions = postReactions[i];
+    if (!reactions) continue;
+    // the id property should match the ID in the Appwrite Collection
+    const blogData = postsWithSlug.find((p) => p.data.id === reactions.id);
+    if (!blogData?.slug) {
+      // the post is not added in the Appwrite collection yet
+      // or the data is invalid
+      // or the ID property in the frontmatter did not match the ID in the Appwrite collection
+      // either way, just exclude it from the list
+      continue;
+    }
+
+    const post: PostDataWithReactions = {
+      ...reactions,
+      href: `/blog/${blogData.slug || "no-slug"}`,
+      title: blogData!.data.title,
+    };
+    debugRankingData.push(post);
+  }
+} catch (error) {
+  console.log("🚨 Error when ranking posts", error);
+  debugRankingData = null;
+}
+---
+
+<Layout
+  title="Blog ranking"
+  description="These are our blog posts with the most reactions"
+>
+  <h1>Blog ranking</h1>
+  <p>Based on the emoji reactions for each post</p>
+  {
+    SHOW_DEBUG_INFO && (
+      <div class="bg-red-900 p-2">
+        <strong>Debug info:</strong>
+        <p>Post data from markdown files from Astro:</p>
+        <pre>{JSON.stringify(debugPostData, null, 2)}</pre>
+        <p>Post reaction data from Appwrite:</p>
+        <pre>{JSON.stringify(debugPostReactionData, null, 2)}</pre>
+        <p>Combined ranking data of {debugRankingData?.length ?? 0} posts:</p>
+        <pre>{JSON.stringify(debugRankingData, null, 2)}</pre>
+      </div>
+    )
+  }
+  <div class="grid gap-8">
+    {
+      debugRankingData &&
+        debugRankingData.map((post, index) => (
+          <RankedPost {...post} rank={index + 1} />
+        ))
+    }
+  </div>
+</Layout>

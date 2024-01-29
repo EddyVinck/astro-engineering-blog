@@ -1,0 +1,29 @@
+---
+import PostList from "../../components/PostList.astro";
+import Layout from "../../layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+const uncategorizedPost = posts
+  .filter((post) => post.data.draft === false)
+  .filter((post) => post.data.topics.length === 0)
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+
+const title = "Uncategorized";
+const description = "Blog posts without an associated topic";
+---
+
+<Layout title={title} description={description}>
+  <section>
+    <h1>{title}</h1>
+    {uncategorizedPost.length === 0 && <p>No posts yet.</p>}
+    {
+      uncategorizedPost.length > 0 && (
+        <>
+          <h2>{description}</h2>
+          <PostList posts={uncategorizedPost} />
+        </>
+      )
+    }
+  </section>
+</Layout>

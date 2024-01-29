@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { PostReactions } from "../../lib/appwrite/appwrite.server";
+import { GET } from "../../pages/api/post-reactions/[id]";
+import { EmojiReactionsButtons } from "./EmojiReactionsButtons";
+
+type Props = {
+  id: CollectionEntry<"blog">["data"]["id"];
+};
+
+let shouldUseBackendServices = false;
+if (!!import.meta.env.SECRET_APPWRITE_API_KEY) {
+  shouldUseBackendServices = true;
+}
+
+let emojiReactions: PostReactions | null = null;
+if (shouldUseBackendServices) {
+  try {
+    let response = await GET({
+      ...Astro,
+      // @ts-ignore
+      ResponseWithEncoding: Response,
+      params: {
+        id: Astro.props.id,
+      },
+    });
+    const json = await (response as Response).json();
+    emojiReactions = json as PostReactions;
+    if ("error" in json) {
+      emojiReactions = null;
+    }
+  } catch (error) {
+    emojiReactions = null;
+  }
+}
+---
+
+<>
+  {
+    shouldUseBackendServices && emojiReactions !== null && (
+      <EmojiReactionsButtons
+        client:idle
+        articleId={Astro.props.id}
+        initialEmojiReactions={emojiReactions}
+      />
+    )
+  }
+</>

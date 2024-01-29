@@ -1,22 +1,24 @@
 ---
+id: "engineering-blog"
 title: "README: What's included in this Engineering Blog template?"
 topics: ["docs"]
 authors:
   - eddy-vinck
 description: "How to get started with your new engineering blog"
+draft: false
 pubDate: "April 24 2023"
-heroImage: "/img/readme.jpg"
+heroImage: "../../assets/images/blog/readme/readme.jpg"
 ---
 
-# Astro Starter Kit: Engineering Blog
+## Astro Starter Kit: Engineering Blog
 
 This template was built to easily create an engineering blog for one or multiple authors.
 
-Demo: https://astro-engineering-blog.netlify.app/
+Demo: <https://astro-engineering-blog.netlify.app/>
 
 ## Getting started
 
-```
+```bash
 npm create astro@latest -- --template eddyvinck/astro-engineering-blog
 ```
 
@@ -50,12 +52,26 @@ module.exports = {
         header: "#f86423",
         "header-foreground": "#000",
         link: "#f86423",
+        "link-dark": "#f86423",
         primary: {
           500: "#f86423",
           600: "#db5215",
         },
         "primary-foreground": "#000",
       },
+```
+
+#### Optional: enable backend services
+
+You can enable backend services to your project by adding an [Appwrite](https://appwrite.io/) API key:
+
+```
+# in /.env
+SECRET_APPWRITE_API_KEY=YOUR_APPWRITE_API_KEY
+PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+PUBLIC_APPWRITE_PROJECT_ID=PUBLIC_APPWRITE_PROJECT_ID
+PUBLIC_APPWRITE_DATABASE_ID=PUBLIC_APPWRITE_DATABASE_ID
+PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID=post-reactions
 ```
 
 ## Features
@@ -74,6 +90,8 @@ module.exports = {
 - ✅ Topics
 - ✅ Blog pagination
 - ✅ Blog drafts
+- ✅ Dark mode (system preference + toggle button)
+- ✅ Backend services (optional, uses Appwrite's free tier)
 
 ## Technologies used
 
@@ -93,7 +111,7 @@ module.exports = {
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```
+```txt
 ├── public/
 ├── src/
 │   ├── components/

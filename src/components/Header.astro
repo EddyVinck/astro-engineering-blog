@@ -18,7 +18,10 @@ const topics = await getCollection("topic");
     >
       <div class="title-container flex w-full justify-between py-3">
         <h2 class="m-0 text-xl font-medium">
-          <a href="/" class="text-header-foreground no-underline">
+          <a
+            href="/"
+            class="text-header-foreground no-underline dark:text-header-foreground"
+          >
             {SITE_TITLE}
           </a>
         </h2>
@@ -63,7 +66,7 @@ const topics = await getCollection("topic");
         class="absolute left-0 top-full hidden w-full bg-header px-5 md:static md:block md:p-0"
       >
         <ul
-          class="m-0 flex list-none flex-col items-start gap-2 px-2 py-4 pb-8 md:flex-row md:items-center md:justify-between md:p-0 md:py-2"
+          class="m-0 flex list-none flex-col items-start gap-4 px-2 py-4 pb-8 md:flex-row md:items-center md:justify-between md:p-0 md:py-2"
         >
           <HeaderLink href="/blog">Blog</HeaderLink>
           <HeaderLink href="/authors">Authors</HeaderLink>
