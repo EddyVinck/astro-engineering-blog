@@ -10,7 +10,7 @@ import { SITE_URL } from "./src/consts";
 export default defineConfig({
   output: "hybrid",
   adapter: netlify({
-    edgeMiddleware: false,
+    edgeMiddleware: true,
     imageCDN: false, // Blog hero image doesn't seem to work with this enabled
   }),
   site: SITE_URL,
