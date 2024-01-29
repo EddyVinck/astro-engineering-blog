@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 import type { PostReactions } from "../../lib/appwrite/appwrite.server";
 import { GET } from "../../pages/api/post-reactions/[id]";
 import { EmojiReactionsButtons } from "./EmojiReactionsButtons";
-import { createContext } from "astro/middleware";
 
 type Props = {
   id: CollectionEntry<"blog">["data"]["id"];
@@ -18,11 +17,10 @@ let emojiReactions: PostReactions | null = null;
 if (shouldUseBackendServices) {
   try {
     console.log(`Trying to enable emoji reactions for "${Astro.props.id}"...`);
-    const context = createContext({
-      request: Astro.request,
+    let response = await GET({
+      ...Astro,
       params: { id: Astro.params.id },
     });
-    let response = await GET(context);
     console.log(response);
     const json = await (response as Response).json();
     emojiReactions = json as PostReactions;
