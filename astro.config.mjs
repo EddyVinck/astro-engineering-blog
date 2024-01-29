@@ -11,7 +11,7 @@ export default defineConfig({
   output: "hybrid",
   adapter: netlify({
     edgeMiddleware: false,
-    imageCDN: true,
+    imageCDN: false, // Blog hero image doesn't seem to work with this enabled
   }),
   site: SITE_URL,
   integrations: [
