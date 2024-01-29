@@ -21,7 +21,7 @@ const Postlimiter = rateLimit({
 
 export const GET: APIRoute = async ({ params, request }): Promise<Response> => {
   const id = params.id;
-  // This is a Netlify header. Astro has clientAddress but it doesn't work in the Netlify adapter.
+  // This is a Netlify header. Astro has client address but it doesn't work in the Netlify adapter.
   const userIP = request.headers.get("client-ip");
   console.log("user ip", userIP);
 
@@ -102,7 +102,7 @@ export const GET: APIRoute = async ({ params, request }): Promise<Response> => {
 
 export const POST: APIRoute = async ({ request, params }) => {
   const id = params.id;
-  // This is a Netlify header. Astro has clientAddress but it doesn't work in the Netlify adapter.
+  // This is a Netlify header. Astro has client address but it doesn't work in the Netlify adapter.
   const userIP = request.headers.get("client-ip");
 
   if (!import.meta.env.SECRET_APPWRITE_API_KEY) {
