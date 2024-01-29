@@ -111,7 +111,7 @@ PUBLIC_APPWRITE_EMOJI_REACTIONS_COLLECTION_ID=post-reactions
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```txt
+```plaintext
 ├── public/
 ├── src/
 │   ├── components/
