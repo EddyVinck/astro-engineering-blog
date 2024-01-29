@@ -16,8 +16,6 @@ if (!!import.meta.env.SECRET_APPWRITE_API_KEY) {
 let emojiReactions: PostReactions | null = null;
 if (shouldUseBackendServices) {
   try {
-    console.log(`Trying to enable emoji reactions for "${Astro.props.id}"...`);
-    console.log(Astro.params);
     let response = await GET(Astro);
     console.log(response);
     const json = await (response as Response).json();
